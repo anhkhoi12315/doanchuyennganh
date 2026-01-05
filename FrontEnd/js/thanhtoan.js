@@ -43,7 +43,8 @@ function renderOrderSummary() {
   const items = cartData.items || [];
   const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const shippingFee = subtotal >= 500000 ? 0 : 30000;
-  const total = subtotal + shippingFee - discountAmount;
+  // Đảm bảo tổng tiền không bị âm (tối thiểu là 0đ)
+  const total = Math.max(0, subtotal + shippingFee - discountAmount);
 
   const itemsHTML = items.map(item => {
     const p = item.product;

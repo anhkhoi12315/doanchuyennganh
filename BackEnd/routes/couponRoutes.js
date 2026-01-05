@@ -43,7 +43,12 @@ router.post('/apply', authenticate, async (req, res) => {
       discountAmount = coupon.discountValue;
     }
 
-    const finalTotal = orderTotal - discountAmount;
+    // Đảm bảo giảm giá không vượt quá tổng tiền (tối thiểu là 0đ)
+    if (discountAmount > orderTotal) {
+      discountAmount = orderTotal;
+    }
+
+    const finalTotal = Math.max(0, orderTotal - discountAmount);
 
     res.json({ 
       success: true, 
