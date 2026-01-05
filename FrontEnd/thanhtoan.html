@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/thanhtoan.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <!-- JS -->
+    <script defer src="js/authSync.js"></script>
+    <script defer src="js/api.js"></script>
+    <script defer src="js/roleCheck.js"></script>
+    <script defer src="js/header.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="./js/darkmode.js"></script>
+    <script defer src="js/chatbot.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <!--Hóa đơn-->
+    <div class="wrapper">
+      <div class="thong-tin-hoa-don">
+        <h2>Thông tin giao hàng</h2>
+        <form id="checkout-form">
+        <div class="info">
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            placeholder="Họ và tên *"
+            required
+          />
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            placeholder="Số điện thoại *"
+            required
+          />
+          <input
+            type="text"
+            id="address"
+            name="address"
+            placeholder="Địa chỉ *"
+            required
+          />
+          <input
+            type="text"
+            id="city"
+            name="city"
+            placeholder="Tỉnh/Thành phố *"
+            required
+          />
+          <input
+            type="text"
+            id="district"
+            name="district"
+            placeholder="Quận/Huyện"
+          />
+          <input
+            type="text"
+            id="ward"
+            name="ward"
+            placeholder="Phường/Xã"
+          />
+        </div>
+        <h3>Ghi chú:<i style="font-size: smaller">(nếu có)</i></h3>
+        <div class="ghiCHƯƠNG >
+          <textarea
+            id="notes"
+            name="notes"
+            placeholder="Nói cho chúng tôi biết bạn đang nghĩ gì!"
+            rows="3"
+            style="width:100%;padding:10px;border:1px solid #ddd;border-radius:4px;"
+          ></textarea>
+        </div>
+      </div>
+      <div class="hoa-don-cua-ban order-summary">
+        <h2>Đơn hàng của bạn</h2>
+        <!-- Will be populated by JS -->
+        <div>Đang tải...</div>
+      </div>
+      
+      <div class="don-hang-thanh-toan" style="background:white;padding:20px;border-radius:8px;margin-top:20px;">
+        <h3>Phương thức thanh toán</h3>
+        <div class="phuong-thuc-thanh-toan">
+          <div style="margin-bottom:15px;">
+            <input type="radio" id="opt1" name="opt" value="COD" checked />
+            <label for="opt1" style="margin-left:8px;">💵 Thanh toán khi nhận hàng (COD)</label>
+          </div>
+          <div style="margin-bottom:15px;">
+            <input type="radio" id="opt2" name="opt" value="momo" />
+            <label for="opt2" style="margin-left:8px;">
+              🏦 Ví điện tử MoMo
+              <img src="img/Logo MoMo.png" style="width:30px;height:30px;margin-left:10px;vertical-align:middle;" />
+            </label>
+          </div>
+          <div style="margin-bottom:15px;">
+            <input type="radio" id="opt3" name="opt" value="banking" />
+            <label for="opt3" style="margin-left:8px;">🏧 Chuyển khoản ngân hàng</label>
+          </div>
+          <div style="margin-bottom:15px;">
+            <input type="radio" id="opt4" name="opt" value="card" />
+            <label for="opt4" style="margin-left:8px;">💳 Thanh toán thẻ</label>
+          </div>
+        </div>
+
+        <!-- Payment Details Section -->
+        <div id="payment-details" style="margin-top:20px;padding:20px;background:#f9f9f9;border-radius:8px;border-left:4px solid #f86624;display:none;">
+          <!-- Content will be filled by JS -->
+        </div>
+
+        <div style="margin-top:20px;display:flex;gap:10px;">
+          <button type="submit" style="flex:1;background:#f86624;color:white;padding:15px;border:none;border-radius:6px;font-size:18px;font-weight:bold;cursor:pointer;">
+            <b>💳 Thanh toán ngay</b>
+          </button>
+          <a href="./giohang.html" style="flex:1;">
+            <button type="button" style="width:100%;background:#666;color:white;padding:15px;border:none;border-radius:6px;font-size:18px;font-weight:bold;cursor:pointer;">
+              <b>🛒 Về giỏ hàng</b>
+            </button>
+          </a>
+        </div>
+      </div>
+      </form>
+    </div>
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <script>
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+    <script defer src="js/thanhtoan.js"></script>
+  </body>
+</html>

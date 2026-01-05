@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Test</title>
+</head>
+<body>
+    <h1>Testing API Loading</h1>
+    <div id="output"></div>
+    
+    <script src="./js/api.js"></script>
+    <script>
+        const output = document.getElementById('output');
+        
+        setTimeout(() => {
+            output.innerHTML += '<p>window.api: ' + (window.api ? 'LOADED ✅' : 'NOT LOADED ❌') + '</p>';
+            
+            if (window.api) {
+                output.innerHTML += '<p>window.api.BASE_URL: ' + window.api.BASE_URL + '</p>';
+                output.innerHTML += '<p>typeof window.api.getProducts: ' + typeof window.api.getProducts + '</p>';
+            }
+        }, 100);
+    </script>
+</body>
+</html>

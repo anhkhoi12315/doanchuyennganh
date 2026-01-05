@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <link rel="stylesheet" href="./css/dangky.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <!-- JS -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+  </head>
+  <body>
+    <header class="header">
+      <!--Logo-left-->
+      <a href="index.html">
+        <div class="logo-left">
+          <img class="logo1" alt="" src="./icon/Logo.svg" />
+          <h1 class="logo1-text">KYP</h1>
+        </div>
+      </a>
+      <!--Info-Right-->
+      <div class="frame-right">
+        <div class="asking">Bạn đã có tài khoản?</div>
+        <a href="dangnhap.html">
+          <button class="btn-signin">
+            <b class="btn-signin-text">Đăng nhập</b>
+          </button>
+        </a>
+        <button class="dark" onclick="darkFunction()">
+          <img class="moon-icon" alt="" src="./icon/moon-light.svg" alt="" />
+        </button>
+      </div>
+      <script src="./js/dangky.js"></script>
+    </header>
+    <div class="line1"></div>
+
+    <!--BODY-->
+    <main class="main">
+      <div class="main-inner">
+        <!--left-->
+        <div class="ads-left"><img src="./img/dangky-anhBG.png" alt="" /></div>
+        <!--Right-->
+        <div class="container-right">
+          <div class="title">Đăng ký</div>
+          <form action="#">
+            <div class="user-details">
+              <!--NAME-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Họ tên</span>
+                  <span class="span"> *</span>
+                </b>
+                <input id="fullnameInput" class="box" type="text" required />
+              </div>
+              <!--EMAIL-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Email</span>
+                  <span class="span"> *</span>
+                </b>
+                <input id="emailInput" class="box" type="email" />
+              </div>
+              <!--GENDER-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Giới tính</span>
+                  <span class="span"> *</span>
+                </b>
+                <select id="genderSelect" class="box" required>
+                  <option value="Nam">Nam</option>
+                  <option value="Nữ">Nữ</option>
+                </select>
+              </div>
+              <!--NUMBER-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Số điện thoại</span>
+                  <span class="span"> *</span>
+                </b>
+                <input
+                  id="phoneInput"
+                  class="box"
+                  type="text"
+                  pattern="[0-9]{9,12}"
+                  title="Vui lòng nhập số điện thoại"
+                  required
+                />
+              </div>
+              <!--DOB-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Ngày sinh</span>
+                  <span class="span"> *</span>
+                </b>
+                <input id="birthdayInput" type="date" required />
+              </div>
+              <!--PASS-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Mật khẩu</span>
+                  <span class="span"> *</span>
+                </b>
+                <input id="password" type="password" minlength="6" required />
+              </div>
+              <!--username-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Tên đăng nhập</span>
+                  <span class="span"> *</span>
+                </b>
+                <input id="usernameInput" type="text" name ="username" required/>
+              </div>
+              <!--PASS-CONFIRM-->
+              <div class="input-box">
+                <b>
+                  <span class="text">Xác nhận mật khẩu</span>
+                  <span class="span"> *</span>
+                </b>
+                <input
+                  id="confirmPassword"
+                  type="password"
+                  minlength="6"
+                  required
+                />
+                <div
+                  id="passwordMatchMessage"
+                  style="display: none; color: red"
+                >
+                  Mật khẩu không khớp
+                </div>
+              </div>
+              <script>
+                const passwordInput = document.getElementById("password");
+                const confirmPasswordInput =
+                  document.getElementById("confirmPassword");
+                const passwordMatchMessage = document.getElementById(
+                  "passwordMatchMessage"
+                );
+
+                function checkPasswordMatch() {
+                  if (passwordInput.value !== confirmPasswordInput.value) {
+                    passwordMatchMessage.style.display = "block";
+                  } else {
+                    passwordMatchMessage.style.display = "none";
+                  }
+                }
+                passwordInput.addEventListener("input", checkPasswordMatch);
+                confirmPasswordInput.addEventListener(
+                  "input",
+                  checkPasswordMatch
+                );
+              </script>
+              <!--CHECK-BOX-->
+              <div class="check-box">
+                <input class="checkbox" type="checkbox" required />
+                <span class="text"
+                  >Tôi đồng ý với <b style="color: #ef9059">KYP</b> về Điều
+                  khoản dịch vụ và Chính sách</span
+                >
+                <span class="span"> *</span>
+              </div>
+              <!--BUTTONS-->
+              <div class="button">
+                <button type="button" class="button-signup">
+                  <b class="button-text">Gửi mã OTP</b>
+                </button>
+              </div>
+
+              <!-- OTP Section (hidden until OTP sent) -->
+              <div id="otpSection" style="display:none; margin-top: 12px;">
+                <div class="input-box">
+                  <b>
+                    <span class="text">Mã OTP</span>
+                    <span class="span"> *</span>
+                  </b>
+                  <input id="otpInput" class="box" type="text" maxlength="6" />
+                </div>
+                <div class="button">
+                  <button type="button" id="verifyOtpBtn" class="button-verify">
+                    <b class="button-text">Xác thực OTP</b>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </main>
+    <div class="line2"></div>
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <script>
+      load("#footer", "./template/footer.html");
+    </script>
+  </body>
+</html>

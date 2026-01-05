@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/yeuthich.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <!-- Scripts -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="./js/yeuthich.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <script>
+      if (typeof load === 'function') load("#header", "./template/header.html");
+    </script>
+    <!-- Main -->
+    <section class="favorites-list">
+      <header class="favorites-header">
+        <h1 class="favorites-title">Danh sách yêu thích</h1>
+        <p class="favorites-count">Đang tải...</p>
+      </header>
+      <div class="add-to-cart-container">
+        <button class="add-to-cart-button">Thêm tất cả vào giỏ hàng</button>
+      </div>
+    </section>
+
+    <!-- Product Grid (populated by JS) -->
+    <main class="product-list">
+      <section class="product-grid">
+        <!-- Products will be loaded here by yeuthich.js -->
+      </section>
+    </main>
+
+    <!-- Action Buttons -->
+    <div class="button-container">
+      <a href="./danhmuc.html">
+        <button class="continue-shopping-btn">Tiếp tục mua hàng</button>
+      </a>
+      <button class="clear-list-btn">Xóa danh sách</button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <script>
+      // Load header and footer after scripts loaded
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

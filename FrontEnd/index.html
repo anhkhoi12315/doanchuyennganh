@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <link rel="stylesheet" href="css/banner.css" />
+    <!-- Scripts -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="./js/home.js"></script>
+    <script defer src="./js/index.js"></script>
+    <script defer src="./js/darkmode.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="js/chatbot.js"></script>
+    <script defer src="js/banner.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <!--  Slider section -->
+    <section id="slider">  
+         <!-- aspect-ratio-169 -->
+      <div class="hero-slider">
+          <!-- Slide 1 -->
+          <div class="hero-slide--1">
+            <a href="./danhmuc.html"><img src="./img/index-slider1.png" alt=""/></a>
+          </div>
+          <!-- Slide 2 -->
+          <div class="hero-slide--2">
+            <a href="./danhmuc.html"><img src="./img/index-Slider2.png" alt=""/></a>
+          </div>
+          <!-- Slide 3 -->
+          <div class="hero-slide--3">
+            <a href="./danhmuc.html"><img src="./img/index-Slider3.png" alt="" onload="loadImage()" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="dot-container">
+        <div class="dot active"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+      </div>
+    </section>
+    <!-- marquee -->
+    <marquee behavior="scroll" direction="left" class="mar">
+      <img src="./img/index-marquee-light.png" alt="marquee">
+    </marquee>
+    <div class="main">
+      <!-- List products sales-->
+    <section id="product-sale">
+      <div class="container">
+        <h2>Ưu đãi tháng này</h2>
+        <div class="prod-list__grid" id="home-deals-grid">
+          <!-- Products will be loaded from API via home.js -->
+          <div style="text-align:center;padding:40px;width:100%;">
+            <p style="color:#999;">⏳ Đang tải sản phẩm...</p>
+          </div>
+        </div>
+        <!-- Button xem thêm -->
+        <a href="./danhmuc.html" class="btn home-product">Xem thêm</a>
+      </div>
+    </section>
+    <div class="line"></div>
+    <!-- Collection -->
+
+    <section id="collection-home">
+      <div class="collection-infor">
+        <h2 class="collection-title">Bộ sưu tập nhẫn cầu hôn</h2>
+        <p class="collection-desc">
+          Đánh thức trái tim với những viên kim cương rực rỡ, biểu tượng cho tình yêu bất diệt
+        </p>
+      </div>
+      <div class="img-collection">
+        <div class="banner-left">
+          <img src="./img/index-banner-1.png" alt="">
+        </div>
+        <div class="banner-right">
+          <img src="./img/index-banner-2.png" alt="">
+          <img src="./img/index-banner-3.png" alt="">
+        </div>
+      </div>
+      <!-- Button Khám phá bộ sưu tập -->
+      <a href="./danhmuc.html" class="btn home-col">Khám phá bộ sưu tập</a>
+    </section>
+    <div class="line"></div>
+    <!-- List products best-seller-->
+    <section id="product-sale">
+      <div class="container">
+        <h2 class="best-seller">Sản phẩm bán chạy</h2>
+        <div class="prod-list__grid" id="home-bestseller-grid">
+          <div style="text-align:center;padding:40px;width:100%;">
+            <p style="color:#999;">⏳ Đang tải sản phẩm...</p>
+          </div>
+        </div>
+        <!-- Button xem thêm -->
+        <a href="./danhmuc.html" class="btn home-product">Xem thêm</a>
+      </div>
+    </section>
+    <div class="line"></div>
+    <!-- Testimonials -->
+    <section id="home-reviews">
+      <div class="review-main">
+        <h2 class="review-title active">
+          <span class="review-title-1">Khách Hàng</span>
+          <span class="review-title-2">Đánh Giá</span>
+        </h2>
+        <p class="review-desc">
+          KHÁCH HÀNG CHÚNG TÔI NÓI GÌ
+        </p>
+        <div class="review-container">
+          <!-- Review 1 -->
+          <div class="home-review">
+            <div class="review-content">
+              <img src="./img/index-avatar-1.jpg" alt="" class="review-avt">
+              <img src="./icon/index-review.svg" alt="" class="review-icon">
+              <p class="review-script">
+                "Mình rất hài lòng với sản phẩm nhẫn bạc đính đá thương hiệu KYP. Nhẫn được làm từ chất liệu bạc cao cấp, sáng bóng, không bị xỉn màu. Đá đính trên nhẫn có màu sắc tươi tắn, lấp lánh, tạo nên vẻ đẹp tinh tế và sang trọng."
+              </p>
+            </div>
+          </div>
+          <!-- Review 2 -->
+          <div class="home-review">
+            <div class="review-content">
+              <img src="./img/index-avatar-2.jpg" alt="" class="review-avt">
+              <img src="./icon/review.svg" alt="" class="review-icon">
+              <p class="review-script">
+                "Tôi đã mua đôi hoa tai kim cương từ KYP làm quà tặng cho vợ và cô ấy rất thích. Thiết kế KYP tinh tế và thanh lịch, chất lượng kim cương cũng rất tốt, sáng bóng và lấp lánh. Đây là món quà hoàn hảo cho những dịp đặc biệt."
+              </p>
+            </div>
+          </div>
+          <!-- Review 3 -->
+          <div class="home-review">
+            <div class="review-content">
+              <img src="./img/index-avatar-3.jpg" alt="" class="review-avt" onload="loadReview()">
+              <img src="./icon/review.svg" alt="" class="review-icon">
+              <p class="review-script">
+                "Chất liệu cao cấp và chế tác tinh xảo từ KYP khiến tôi cảm thấy vô cùng sang trọng và đẳng cấp. Dịch vụ khách hàng của KYP cũng rất chuyên nghiệp và CHƯƠNG đáo. Tôi thực sự hài lòng với sản phẩm này và highly recommend cho mọi người!"
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- 3 dots -->
+      <div class="dot-container-review">
+        <div class="dot-review active"></div>
+        <div class="dot-review"></div>
+        <div class="dot-review"></div>
+      </div>
+    </section>
+    <!-- Newsletter -->
+    <section id="newsletter">
+      <div class="container">
+        <div class="news">
+          <p class="news-content">Đăng ký bản tin của KYP để cập nhật thông tin mới nhất về chương trình giảm giá và sản phẩm!</p>
+          <form class="news-register">
+            <input type="text" name="dangKy" id="dangKy" placeholder="Nhập Email của bạn" class="text-reg">
+            <button class="btn register">
+              Đăng ký
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+    </div>
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <!-- Socket.io for real-time updates -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script defer src="./js/socketClient.js"></script>
+    <script>
+      // Load header and footer after all scripts loaded
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        // If load not ready, wait for it
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>
+
+

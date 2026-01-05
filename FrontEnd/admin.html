@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin - Quản lý sản phẩm & danh mục</title>
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <style>
+      body { font-family: 'Quicksand', sans-serif; padding: 20px; background: #f5f5f5; }
+      .admin-wrap { max-width: 1400px; margin: 0 auto; }
+      .admin-header { display:flex; justify-content:space-between; align-items:center; background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .admin-header h1 { color: #f86624; margin: 0; }
+      
+      /* Tabs */
+      .tabs { display: flex; gap: 10px; background: white; padding: 10px 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .tab-btn { background: transparent; border: none; padding: 12px 24px; cursor: pointer; font-size: 16px; font-weight: 600; color: #666; border-radius: 6px; transition: all 0.3s; }
+      .tab-btn.active { background: #f86624; color: white; }
+      .tab-btn:hover:not(.active) { background: #ffe8dc; color: #f86624; }
+      
+      .tab-content { display: none; }
+      .tab-content.active { display: block; }
+      
+      .admin-controls { display:flex; gap:20px; background: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .admin-form { border:1px solid #eee; padding:20px; border-radius:8px; flex: 1; max-width: 400px; background: #fafafa; }
+      .admin-form h3 { margin-top: 0; color: #333; }
+      .form-group { margin-bottom: 15px; }
+      .form-group label { display: block; margin-bottom: 5px; font-weight: 600; color: #555; }
+      .form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-family: inherit; }
+      .form-group textarea { min-height: 80px; resize: vertical; }
+      
+      .table-container { flex: 1; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+      .admin-table { width:100%; border-collapse:collapse; margin-top:15px; }
+      .admin-table th { background: #f86624; color: white; padding: 12px; text-align:left; font-weight: 600; }
+      .admin-table td { border:1px solid #eee; padding:10px; }
+      .admin-table tbody tr:hover { background: #fff8f5; }
+      
+      .btn { background:#f86624;color:#fff;border:none;padding:10px 16px;border-radius:4px;cursor:pointer; font-weight: 600; transition: all 0.3s; }
+      .btn:hover { background: #d64d10; transform: translateY(-1px); }
+      .btn.secondary { background:#666; }
+      .btn.secondary:hover { background: #444; }
+      .notice { padding:12px; background:#fff4e6;border:1px solid #ffd2a6; border-radius: 6px; margin-bottom: 15px; }
+      
+      .search-box { display: flex; gap: 10px; margin-bottom: 15px; }
+      .search-box input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+      
+      .category-badge { display: inline-block; padding: 4px 12px; background: #e3f2fd; color: #1976d2; border-radius: 12px; font-size: 12px; font-weight: 600; }
+    </style>
+    <script src="./js/authSync.js"></script>
+    <script src="./js/api.js"></script>
+    <script src="./js/roleCheck.js"></script>
+    <script src="./js/header.js"></script>
+    <link rel="stylesheet" href="css/footer.css" />
+  </head>
+  <body>
+    <header id="header"></header>
+    <script>
+      function load(selector, url) {
+        fetch(url)
+          .then(response => response.text())
+          .then(data => {
+            document.querySelector(selector).innerHTML = data;
+          })
+          .catch(err => console.error('Error loading template:', err));
+      }
+      load('#header','./template/header.html');
+      
+      // Tab switching
+      function switchTab(tabName) {
+        // Hide all tabs
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        
+        // Show selected tab
+        const tabContent = document.getElementById('tab-' + tabName);
+        if (tabContent) tabContent.classList.add('active');
+        
+        // Find and activate button
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(btn => {
+          if (btn.textContent.includes({
+            'products': 'Sản phẩm',
+            'categories': 'Danh mục', 
+            'orders': 'Đơn hàng',
+            'users': 'Người dùng',
+            'stats': 'Thống kê'
+          }[tabName] || '')) {
+            btn.classList.add('active');
+          }
+        });
+        
+        // Load data for specific tabs
+        if (tabName === 'orders' && window.loadOrders) window.loadOrders();
+        if (tabName === 'users' && window.loadUsers) window.loadUsers();
+        if (tabName === 'stats' && window.loadStats) window.loadStats();
+      }
+    </script>
+
+    <div class="admin-wrap">
+      <div class="admin-header">
+        <h1>🛡️ Quản Trị Viên</h1>
+        <div id="admin-status" class="notice" style="margin: 0;"></div>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab('products')">📦 Sản phẩm</button>
+        <button class="tab-btn" onclick="switchTab('categories')">🏷️ Danh mục</button>
+        <button class="tab-btn" onclick="switchTab('orders')">📋 Đơn hàng</button>
+        <button class="tab-btn" onclick="switchTab('users')">👥 Người dùng</button>
+        <button class="tab-btn" onclick="switchTab('stats')">📊 Thống kê</button>
+        <a href="./admin-coupons.html" class="tab-btn" style="text-decoration:none;display:flex;align-items:center;">🎟️ Mã giảm giá</a>
+        <a href="./admin-banners.html" class="tab-btn" style="text-decoration:none;display:flex;align-items:center;">🎉 Banner</a>
+        <a href="./admin-chat-history.html" class="tab-btn" style="text-decoration:none;display:flex;align-items:center;">💬 Lịch sử Chat</a>
+      </div>
+
+      <!-- Tab Products -->
+      <div id="tab-products" class="tab-content active">
+        <div class="admin-controls">
+          <form id="product-form" class="admin-form">
+            <h3 id="product-form-title">Thêm sản phẩm</h3>
+            <input type="hidden" id="p-id" />
+            <div class="form-group">
+              <label>Tên sản phẩm *</label>
+              <input id="p-name" required />
+            </div>
+            <div class="form-group">
+              <label>Giá *</label>
+              <input id="p-price" type="number" required />
+            </div>
+            <div class="form-group">
+              <label>Giá khuyến mãi</label>
+              <input id="p-salePrice" type="number" placeholder="Để trống nếu không sale" />
+            </div>
+            <div class="form-group">
+              <label>Danh mục *</label>
+              <select id="p-category" required>
+                <option value="">-- Chọn danh mục --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Chất liệu</label>
+              <select id="p-material">
+                <option value="">-- Chọn --</option>
+                <option value="gold">Vàng</option>
+                <option value="silver">Bạc</option>
+                <option value="diamond">Kim cương</option>
+                <option value="pearl">Ngọc trai</option>
+                <option value="gemstone">Đá quý</option>
+                <option value="platinum">Bạch kim</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Phong cách</label>
+              <select id="p-style">
+                <option value="">-- Chọn --</option>
+                <option value="classic">Cổ điển</option>
+                <option value="modern">Hiện đại</option>
+                <option value="luxury">Sang trọng</option>
+                <option value="minimalist">Tối giản</option>
+                <option value="vintage">Vintage</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Trọng lượng (gram)</label>
+              <input id="p-weight" type="number" step="0.1" />
+            </div>
+            <div class="form-group">
+              <label>Ảnh sản phẩm</label>
+              <div id="image-manager" style="border:1px solid #ddd;padding:15px;border-radius:8px;background:#f9f9f9;">
+                <div style="display:flex;gap:10px;margin-bottom:15px;">
+                  <input type="text" id="new-image-url" placeholder="Nhập URL ảnh (VD: /img/products/product.jpg)" style="flex:1;padding:10px;border:1px solid #ddd;border-radius:4px;" />
+                  <button type="button" id="add-image-btn" style="padding:10px 20px;background:#27ae60;color:white;border:none;border-radius:4px;cursor:pointer;font-weight:600;">➕ Thêm</button>
+                </div>
+                <div id="images-preview" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;">
+                  <!-- Images will be rendered here -->
+                </div>
+              </div>
+              <input type="hidden" id="p-images" />
+            </div>
+            <div class="form-group">
+              <label>Tồn kho *</label>
+              <input id="p-stock" type="number" min="0" value="0" required />
+            </div>
+            <div class="form-group">
+              <label>Mô tả</label>
+              <textarea id="p-desc" rows="3"></textarea>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button type="submit" class="btn">💾 Lưu</button>
+              <button type="button" class="btn secondary" id="reset-product-form">🔄 Mới</button>
+            </div>
+          </form>
+
+          <div class="table-container">
+            <div class="search-box">
+              <input id="product-search" placeholder="🔍 Tìm kiếm sản phẩm..." />
+              <button id="refresh-products-btn" class="btn secondary">↻ Tải lại</button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Ảnh</th>
+                  <th>Tên</th>
+                  <th>Danh mục</th>
+                  <th>Giá</th>
+                  <th>Tồn kho</th>
+                  <th>Đã bán</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="products-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Categories -->
+      <div id="tab-categories" class="tab-content">
+        <div class="admin-controls">
+          <form id="category-form" class="admin-form">
+            <h3 id="category-form-title">Thêm danh mục</h3>
+            <input type="hidden" id="c-id" />
+            <div class="form-group">
+              <label>Tên danh mục *</label>
+              <input id="c-name" required />
+            </div>
+            <div class="form-group">
+              <label>Mô tả</label>
+              <textarea id="c-description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label>Ảnh đại diện (URL)</label>
+              <input id="c-image" placeholder="https://..." />
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <button type="submit" class="btn">💾 Lưu</button>
+              <button type="button" class="btn secondary" id="reset-category-form">🔄 Mới</button>
+            </div>
+          </form>
+
+          <div class="table-container">
+            <div class="search-box">
+              <input id="category-search" placeholder="🔍 Tìm kiếm danh mục..." />
+              <button id="refresh-categories-btn" class="btn secondary">↻ Tải lại</button>
+            </div>
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Ảnh</th>
+                  <th>Tên danh mục</th>
+                  <th>Mô tả</th>
+                  <th>Số sản phẩm</th>
+                  <th>Hành động</th>
+                </tr>
+              </thead>
+              <tbody id="categories-tbody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Orders -->
+      <div id="tab-orders" class="tab-content">
+        <div class="table-container">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <h2>📋 Quản lý Đơn hàng</h2>
+            <div style="display:flex;gap:10px;">
+              <select id="order-status-filter" style="padding:10px;border:1px solid #ddd;border-radius:4px;">
+                <option value="">Tất cả trạng thái</option>
+                <option value="pending">Chờ xác nhận</option>
+                <option value="confirmed">Đã xác nhận</option>
+                <option value="processing">Đang CHƯƠNG n bị</option>
+                <option value="shipping">Đang giao</option>
+                <option value="delivered">Đã giao</option>
+                <option value="cancelled">Đã hủy</option>
+              </select>
+              <button id="refresh-orders-btn" class="btn secondary">↻ Tải lại</button>
+            </div>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Mã đơn</th>
+                <th>Khách hàng</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Ngày tạo</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="orders-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Users -->
+      <div id="tab-users" class="tab-content">
+        <div class="table-container">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+            <h2>👥 Quản lý Người dùng</h2>
+            <div class="search-box" style="margin:0;">
+              <input id="user-search" placeholder="🔍 Tìm kiếm người dùng..." style="width:300px;" />
+              <button id="refresh-users-btn" class="btn secondary">↻ Tải lại</button>
+            </div>
+          </div>
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Tên</th>
+                <th>Email</th>
+                <th>Vai trò</th>
+                <th>Trạng thái</th>
+                <th>Ngày tạo</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody id="users-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab Stats -->
+      <div id="tab-stats" class="tab-content">
+        <div class="table-container">
+          <h2>📊 Thống kê Tổng quan</h2>
+          <div id="stats-container" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;margin-top:20px;">
+            <!-- Stats cards will be loaded here -->
+          </div>
+          
+          <div style="margin-top:30px;">
+            <h3>📈 Doanh thu theo ngày</h3>
+            <div id="revenue-chart" style="background:white;padding:20px;border-radius:8px;margin-top:15px;">
+              <!-- Chart will be here -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer"></footer>
+    <script>load('#footer', './template/footer.html');</script>
+
+    <!-- Socket.io for real-time updates -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="./js/socketClient.js"></script>
+    <script src="./js/admin.js" defer></script>
+    <script src="./js/admin-orders.js" defer></script>
+    <script src="./js/admin-users.js" defer></script>
+    <script src="./js/admin-stats.js" defer></script>
+
+  </body>
+</html>

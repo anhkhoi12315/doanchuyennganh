@@ -1,0 +1,2166 @@
+﻿<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Round|Material+Icons+Sharp|Material+Icons+Two+Tone"
+      rel="stylesheet"
+    />
+    <!-- FONT AWESOME - THƯ VIỆN ICON -->
+    <link
+      rel="stylesheet"
+      href="https://cdưjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
+    <!-- GG Font -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Prata:wght@400&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Boxicon CSS -->
+    <link
+      href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- swiper css -->
+    <link rel="stylesheet" href="css/swiper-bundle.min.css" />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/danhmuc.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <link rel="stylesheet" href="css/banner.css" />
+    <!-- Scripts -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="./js/danhmuc.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="./js/darkmode.js"></script>
+    <script defer src="js/chatbot.js"></script>
+    <script defer src="js/banner.js"></script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <!-----------------Phần trang chủ/SẢN PHẨM-------------->
+    <div class="prod-longest-line"></div>
+    <div class="container-main">
+      <!------------------- Product Wrap --------------------------->
+      <div class="container">
+        <h2 class="container__title-page-product">SẢN PHẨM</h2>
+        <div class="container__product-wrap">
+          <ul class="product-wrap--nav-links">
+            <li class="center"><a href="#">TẤT CẢ</a></li>
+            <li class="center"><a href="#">NHẪN</a></li>
+            <li class="center"><a href="#">DÂY CHUYỀN</a></li>
+            <li class="center"><a href="#">VÒNG TAY</a></li>
+            <li class="center"><a href="#">BÔNG TAI</a></li>
+          </ul>
+        </div>
+        <div class="prod-second-line"></div>
+      </div>
+
+      <!---------------------- Bộ lọc SẢN PHẨM --------------------------------->
+      <article id="article-products">
+        <div class="toolbar toolbar-products">
+          <div class="filter-wrapper pull-left">
+            <div class="filter-custom trigger-filter">
+              <span>Bộ lọc</span>
+              <div class="groupFilterNew">
+                <div class="contentFilter clearfix">
+                  <div class="collection-filter-price collection-item">
+                    <div class="sidebar-sort">
+                      <div class="sort_title">
+                        <span>Khoảng giá</span> <i class="fa fa-sort-down"></i>
+                      </div>
+                      <ul
+                        class="no-bullets filter-price clearfix sidebar-content"
+                      >
+                        <li
+                          class="hide custom-filter-input"
+                          data-filter1="0-max"
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              name="price-filter"
+                              data-price="0:max"
+                              data-value="0:max"
+                              value="((price:product>=0))"
+                            />
+                            <span>TẤT CẢ</span>
+                          </label>
+                        </li>
+                        <li
+                          class="custom-filter-input"
+                          data-filter1="0-1-000-000"
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              name="price-filter"
+                              data-price="0:1,000,000"
+                              data-value="0-1-000-000"
+                              value="((price:product<1,000,000))"
+                            />
+                            <span>Nhỏ hơn 1.000.000đ</span>
+                          </label>
+                        </li>
+                        <li
+                          class="custom-filter-input"
+                          data-filter1="1-000-000-3-000-000"
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              name="price-filter"
+                              data-price="1,000,000:3,000,000"
+                              data-value="1-000-000-3-000-000"
+                              value="((price:product>=1,000,000)&amp;&amp;(price:product<3,000,000))"
+                            />
+                            <span>Từ 1.000.000đ - 3.000.000đ</span>
+                          </label>
+                        </li>
+                        <li
+                          class="custom-filter-input"
+                          data-filter1="3-000-000-5-000-000"
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              name="price-filter"
+                              data-price="3,000,000:5,000,000"
+                              data-value="3-000-000-5-000-000"
+                              value="((price:product>=3,000,000)&amp;&amp;(price:product<5,000,000))"
+                            />
+                            <span>Từ 3.000.000đ - 5.000.000đ</span>
+                          </label>
+                        </li>
+                        <li
+                          class="custom-filter-input"
+                          data-filter1="5-000-000-7-000-000"
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              name="price-filter"
+                              data-price="5,000,000:7,000,000"
+                              data-value="5-000-000-7-000-000"
+                              value="((price:product>=5,000,000)&amp;&amp;(price:product<7,000,000))"
+                            />
+                            <span>Từ 5.000.000đ - 7.000.000đ</span>
+                          </label>
+                        </li>
+                        <li
+                          class="custom-filter-input"
+                          data-filter1="7-000-000-10-000-000"
+                        >
+                          <label>
+                            <input
+                              type="checkbox"
+                              name="price-filter"
+                              data-price="7,000,000:10,000,000"
+                              data-value="7-000-000-10-000-000"
+                              value="((price:product>=7,000,000)&amp;&amp;(price:product<10,000,000))"
+                            />
+                            <span>Từ 7.000.000đ - 10.000.000đ</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="collection-filter-chatlieu collection-item">
+                    <div class="sidebar-sort">
+                      <div class="sort_title">
+                        <span>Chất Liệu</span> <i class="fa fa-sort-down"></i>
+                      </div>
+                      <ul
+                        class="chat-lieu filter-variant filter-color clearfix"
+                      >
+                        <li class="chat-lieu-filter">
+                          <label
+                            data-filter="Vàng"
+                            data-filter1="vang"
+                            class="filter-vendor__item custom-filter-input vang"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=Vàng)"
+                              data-value="vang"
+                            />
+                            <span>Vàng</span>
+                          </label>
+                        </li>
+
+                        <li class="chat-lieu-filter">
+                          <label
+                            data-filter="Bạc"
+                            data-filter1="bac"
+                            class="filter-vendor__item custom-filter-input bac"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=Bạc)"
+                              data-value="bac"
+                            />
+                            <span>Bạc</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="collection-filter-loaida collection-item">
+                    <div class="sidebar-sort">
+                      <div class="sort_title">
+                        <span>Loại Đá</span> <i class="fa fa-sort-down"></i>
+                      </div>
+                      <ul
+                        class="chat-lieu filter-variant filter-color clearfix"
+                      >
+                        <li class="chat-lieu-filter">
+                          <label
+                            data-filter="Đá Xà cừ"
+                            data-filter1="da-xa-cu"
+                            class="filter-vendor__item custom-filter-input da-xa-cu"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=Đá Xà cừ)"
+                              data-value="da-xa-cu"
+                            />
+                            <span>Đá Xà cừ</span>
+                          </label>
+                        </li>
+
+                        <li class="chat-lieu-filter">
+                          <label
+                            data-filter="Đá CubicĐá Zirconia"
+                            data-filter1="da-cubic-zirconia"
+                            class="filter-vendor__item custom-filter-input da-cubic-zirconia"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=Đá CubicĐá Zirconia)"
+                              data-value="da-cubic-zirconia"
+                            />
+                            <span>Đá CubicĐá Zirconia</span>
+                          </label>
+                        </li>
+
+                        <li class="chat-lieu-filter">
+                          <label
+                            data-filter="Đá Zirconia"
+                            data-filter1="da-zirconia"
+                            class="filter-vendor__item custom-filter-input da-zirconia"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=Đá Zirconia)"
+                              data-value="da-zirconia"
+                            />
+                            <span>Đá Zirconia</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="collection-filter-kieudang collection-item">
+                    <div class="sidebar-sort">
+                      <div class="sort_title">
+                        <span>Kiểu Dáng</span> <i class="fa fa-sort-down"></i>
+                      </div>
+                      <ul class="kieu-dang filter-variant filter-color clearfix">
+                        <li class="kieu-dang-filter">
+                          <label
+                            data-filter="classic"
+                            data-filter1="classic"
+                            class="filter-vendor__item custom-filter-input classic"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=classic)"
+                              data-value="classic"
+                            />
+                            <span>Cđ diấn</span>
+                          </label>
+                        </li>
+
+                        <li class="kieu-dang-filter">
+                          <label
+                            data-filter="modenh"
+                            data-filter1="modenh"
+                            class="filter-vendor__item custom-filter-input modenh"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=modenh)"
+                              data-value="modenh"
+                            />
+                            <span>Hiấn đểi</span>
+                          </label>
+                        </li>
+
+                        <li class="kieu-dang-filter">
+                          <label
+                            data-filter="minimalist"
+                            data-filter1="minimalist"
+                            class="filter-vendor__item custom-filter-input minimalist"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=minimalist)"
+                              data-value="minimalist"
+                            />
+                            <span>Tời giấn</span>
+                          </label>
+                        </li>
+
+                        <li class="kieu-dang-filter">
+                          <label
+                            data-filter="vintage"
+                            data-filter1="vintage"
+                            class="filter-vendor__item custom-filter-input vintage"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=vintage)"
+                              data-value="vintage"
+                            />
+                            <span>Cđ diấn sang trằng</span>
+                          </label>
+                        </li>
+
+                        <li class="kieu-dang-filter">
+                          <label
+                            data-filter="luxury"
+                            data-filter1="luxury"
+                            class="filter-vendor__item custom-filter-input luxury"
+                          >
+                            <input
+                              class=""
+                              type="checkbox"
+                              value="(variant:product=luxury)"
+                              data-value="luxury"
+                            />
+                            <span>Sang trằng</span>
+                          </label>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!-- Cc phần Từ filter -->
+                <div class="header_filter_chosen">
+                  <span class="filter_chosen" data-value="0:max"
+                    >0 : max <a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="0-1-000-000"
+                    >0 : 1.000.000d <a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="1-000-000-3-000-000"
+                    >1.000.000d : 3.000.000d <a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="3-000-000-5-000-000"
+                    >3.000.000d : 5.000.000d <a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="5-000-000-7-000-000"
+                    >5.000.000d : 7.000.000d <a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="7-000-000-10-000-000"
+                    >7.000.000d : 10.000.000d <a><span></span></a
+                  ></span>
+
+                  <span class="filter_chosen" data-value="vang"
+                    >Vàng <a><span></span></a
+                  ></span>
+
+                  <span class="filter_chosen" data-value="bac"
+                    >Bạc<a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="da-xa-cu"
+                    >Đá Xà cừ<a><span></span></a
+                  ></span>
+
+                  <span class="filter_chosen" data-value="da-cubic-zirconia"
+                    >Đá CubicĐá Zirconia<a><span></span></a
+                  ></span>
+                  <span class="filter_chosen" data-value="da-zirconia"
+                    >Đá Zirconia<a><span></span></a
+                  ></span>
+
+                  <span class="clear_all"
+                    ><a href="javascript:vàoid(0)">Bộ lọc</a></span
+                  >
+                </div>
+                <div class="bottom-filter">
+                  <button class="btn-custom-filter">ÁP DỤNG</button>
+                  <button class="cancel-filter">HỦY</button>
+                </div>
+              </div>
+            </div>
+            <!-- bạ qua file js riêng ko si được -->
+            <!-- bao gểm THƯ VIỆN jQuery -->
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+              $(document).ready(function () {
+                $(".custom-filter-input input").click(function () {
+                  // lấy giá trị của thuộc tính data-value của lựa chọn đã được nhập vào và lưu trữ vào biến value
+                  var value = $(this).attr("data-value");
+                  console.log(value);
+                  $(
+                    //hiển thị giá trị đã chọn trong Bộ lọc
+                    ".header_filter_chosen .filter_chosen[data-value=" +
+                      value +
+                      "]"
+                  ).toggleClass("show_tag");
+
+                  var check_filter = false;
+                  $(".filter_chosen").each(function () {
+                    if ($(this).hasClass("show_tag")) {
+                      check_filter = true;
+                    }
+                  });
+                  if (check_filter) {
+                    $(".clear_all").addClass("show_btn");
+                  } else {
+                    $(".clear_all").removeClass("show_btn");
+                  }
+                });
+
+                $(".clear_all a").click(function () {
+                  $(".filter_chosen.show_tag a").trigger("click");
+                });
+
+                $(".filter-color label").click(function () {
+                  $(this).toggleClass("active");
+                });
+
+                $(".header_filter_chosen .filter_chosen > a").click(
+                  function () {
+                    var $parent = $(this).parent();
+                    //      $(this).parent('.filter_chosen').removeClass('show_tag');
+
+                    var val = $parent.attr("data-value");
+                    $(".custom-filter-input[data-filter1=" + val + "]")
+                      .find("input")
+                      .trigger("click");
+                  }
+                );
+                $(".header_filter_chosen .filter_chosen.price > a").click(
+                  function () {
+                    var $parent = $(this).parent();
+                    var val = $parent.attr("data-value");
+                    $(".custom-filter-input[data-filter1=0-max]")
+                      .find("input")
+                      .trigger("click");
+                  }
+                );
+              });
+            </script>
+            <script>
+              $(document).ready(function () {
+                $(".filter-custom > span").click(function () {
+                  $(".groupFilterNew").toggle("fast");
+                });
+                $(".btư-custom-filter").click(function () {
+                  $(".groupFilterNew").hide();
+                });
+                $(".cancel-filter").click(function () {
+                  $(".clear_all > a").trigger("click");
+                });
+              });
+            </script>
+            <!----------------------------- -->
+            <h3 class="trigger-filter--separator">|</h3>
+            <div class="toolbar-amount" id="toolbar-amount">
+              <!-- Hiển thị: -->
+              <span class="toolbar-number">12</span>
+              SẢN PHẨM
+            </div>
+          </div>
+          <!----------- DROPDOWN ------------>
+          <div class="prod-dropdown">
+            <label class="prod-dropdown--left">
+              <i class="fa-solid fa-arrow-up-wide-short"></i> Sắp xếp:
+            </label>
+            <div class="prod-dropdown--right">
+              <div class="prod-dropdown__input-box"></div>
+              <div class="prod-dropdown__list">
+                <input type="radio" name="drop1" id="id1" class="radio" />
+                <label for="id1">
+                  <span class="name">Mặc định</span>
+                </label>
+
+                <input type="radio" name="drop1" id="id2" class="radio" />
+                <label for="id2">
+                  <span class="name">Giá Từ thấp tới cao</span>
+                </label>
+
+                <input type="radio" name="drop1" id="id3" class="radio" />
+                <label for="id3">
+                  <span class="name">Giá Từ cao tới thấp</span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- jvs DROPDOWN -->
+        <script>
+          var input = document.querySelector(".prod-dropdown__input-box");
+          input.onclick = function () {
+            this.classList.toggle("open");
+            let list = this.nextElementSibling;
+            if (list.style.maxHeight) {
+              list.style.maxHeight = null;
+              list.style.boxShadow = null;
+            } else {
+              list.style.maxHeight = list.scrollHeight + "px";
+              list.style.boxShadow =
+                "0 1px 2px 0 rgba(0, 0, 0, 0.15),0 1px 3px 1px rgba(0, 0, 0, 0.1)";
+            }
+          };
+
+          var rad = document.querySelectorAll(".radio");
+          rad.forEach((item) => {
+            item.addEventListener("change", () => {
+              input.innerHTML = item.nextElementSibling.innerHTML;
+              input.click();
+              
+              // Trigger filter with sort
+              if (window.applySortFilter) {
+                const sortValue = item.id === 'id2' ? 'price' : 
+                                 item.id === 'id3' ? '-price' : 
+                                 '-createdAt';
+                window.applySortFilter(sortValue);
+              }
+            });
+          });
+        </script>
+
+        <!--------------- Tứng hập cc SẢN PHẨM-------------->
+        <div class="prod-list">
+          <div class="prod-list__grid">
+            <!-- products will be rendered here by JS -->
+            <div class="loading">Đang tải SẢN PHẨM...</div>
+          </div>
+        </div>
+        <!---------------------- PAGINATION PHA DUời cC SẢN PHẨM --------------------------------->
+        <div class="prod-list__pagi"></div>
+        <div class="prod-list__pagination" style="display:none;">
+          <div class="pagination--container">
+            <!-- --------- Mui tư "<<" ------------>
+            <button
+              class="pagination--container__button"
+              id="pagination_startBtư"
+              disabled
+            >
+              <i class="fa-solid fa-angles-left"></i>
+            </button>
+            <!-- --------- Mui tư "<" ------------>
+            <button
+              class="pagination--container__button prevNext"
+              id="pagination_prev"
+              disabled
+            >
+              <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <!-- ---------Cc số trang------------>
+            <div class="prod-list__pagination--numbers">
+              <a href="#" class="link active">1</a>
+              <a href="#" class="link">2</a>
+              <a href="#" class="link">3</a>
+              <a href="#" class="link">4</a>
+            </div>
+            <!-- --------- Mui tư ">" ------------>
+            <button
+              class="pagination--container__button prevNext"
+              id="pagination_next"
+            >
+              <i class="fa-solid fa-angle-right"></i>
+            </button>
+            <!-- --------- Mui tư ">>" ------------>
+            <button
+              class="pagination--container__button"
+              id="pagination_endBtư"
+            >
+              <i class="fa-solid fa-angles-right"></i>
+            </button>
+          </div>
+        </div>
+        <!-- //pagination SẢN PHẨM -->
+        <script>
+          // Lđịa chọn cc phần Từ DOM
+          const pagination_startBtư = document.querySelector(
+              "#pagination_startBtư"
+            ), // nt "Bặt đểu"
+            pagination_endBtư = document.querySelector("#pagination_endBtư"), // nt "Kặt thc"
+            prevNext = document.querySelectorAll(".prevNext"), // mứng chỗịa nt "Previous" v "Next"
+            numbers = document.querySelectorAll(".link"); // mứng chỗịa cc lin kặt số trang
+
+          // Thiết lập bước khởi đầu
+          let currentStep = 0; //Biến currentStep được sử dụng để lưu trạng thái hiện tại của bước.
+
+          //Hàm cập nhật trạng thái nút
+          const updateBtn = () => {
+            // Nếu ? bước cuời tược l trang cuời
+            if (currentStep === 3) {
+              pagination_endBtư.disabled = true; //nt "End" số bạ v hiều ha
+              prevNext[1].disabled = true; //nt "Next" bạ v hiều ha
+            }
+            //Nếu currentStep bứng 0, hoặc dang ? trang đểu tin
+            else if (currentStep === 0) {
+              // Nếu ? trang đểu tin
+              pagination_startBtư.disabled = true; //nt "Start" số bạ v hiều ha
+              prevNext[0].disabled = true; // nt "Previous" bạ v hiều ha
+            }
+            //Nếu currentStep khôngg phải l 0 hoặc 3
+            /*TẤT CẢ cc nt "Start", "End", "Previous" v "Next" đểu được kch hoặt để cho php nguời dưg di chuyấn qua cc trĐăng kýhc nhau. */
+            else {
+              // TẤT CẢ cc nt "Bặt đểu", "Kặt thc", "Previous" v "Next" đểu được kch hoặt để cho php nguời dưg di chuyấn qua cc trĐăng kýhc nhau.
+              pagination_endBtư.disabled = false;
+              prevNext[1].disabled = false;
+              pagination_startBtư.disabled = false;
+              prevNext[0].disabled = false;
+            }
+          };
+
+          // Thm event listeners cho cc lin kặt số trang
+          numbers.forEach((number, numIndex) => {
+            number.addEventListener("click", (e) => {
+              e.preventDefault();
+              //ặt bước hiện tại thành số trang được nhập vào
+              currentStep = numIndex;
+              // Xa lập "active" Từ lin kặt số trang truược d
+              document.querySelector(".active").classList.remove("active");
+              // Thêm lớp "active" vào link số trang được nhấp vào
+              number.classList.add("active");
+              updateBtn(); // Cập nhật trạng thái các nút
+            });
+          });
+
+          // Thm cc tưhh nghe số kiấn cho cc nt "Previous" v "Next"
+          prevNext.forEach((button) => {
+            button.addEventListener("click", (e) => {
+              // Tang hoặc giểm bước hiện tại đểa tưh nt được nhập vào
+              currentStep += e.target.id === "pagination_next" ? 1 : -1;
+              numbers.forEach((number, numIndex) => {
+                /// Chuyển đổi lớp "active" từ các link số trang dựa trên bước hiện tại
+                number.classList.toggle("active", numIndex === currentStep);
+                updateBtn(); // Cập nhật trạng thái các nút
+              });
+            });
+          });
+
+          // Thm tưhh nghe số kiấn cho nt "Start"
+          pagination_startBtư.addEventListener("click", () => {
+            // Xa lập "active" Từ lin kặt số trang truược d
+            document.querySelector(".active").classList.remove("active");
+            // Thêm lớp "active" vào link số trang đầu tiên
+            numbers[0].classList.add("active");
+            currentStep = 0;
+            updateBtn(); // Cập nhật trạng thái các nút
+            pagination_endBtư.disabled = false;
+            prevNext[1].disabled = false;
+          });
+
+          // Thm tưhh nghe số kiấn cho nt "Kặt thc"
+          pagination_endBtư.addEventListener("click", () => {
+            // Xa lập "active" Từ lin kặt số trang truược d
+            document.querySelector(".active").classList.remove("active");
+            // Thêm lớp "active" vào link số trang cuối cùng
+            numbers[3].classList.add("active");
+            currentStep = 4;
+            updateBtn(); // Cập nhật trạng thái các nút
+            pagination_startBtư.disabled = false;
+            prevNext[0].disabled = false;
+          });
+        </script>
+        <div class="prod-third-line"></div>
+      </article>
+
+      <!------------------ GỢI Ý SẢN PHẨM----------------------->
+      <div class="suggest-prod">
+        <h2 class="suggest-prod--text">GỢI Ý CHO BẠN</h2>
+      </div>
+      <div class="slide-container swiper">
+        <div class="slide-content">
+          <div class="card-wrapper swiper-wrapper">
+            <!-- Gời  products - loaded dynamically -->
+          </div>
+        </div>
+        <div class="swiper-button-next swiper-navBtư"></div>
+        <div class="swiper-button-prev swiper-navBtư"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <!-- Swiper JS -->
+      <script src="js/swiper-bundle.min.js"></script>
+      <!-- card-sider -->
+      <script>
+        // Load suggested products for swiper
+        async function loadSuggestedProducts() {
+          try {
+            const response = await fetch(window.api.BASE_URL + '/products/featured');
+            const data = await response.json();
+            const products = data.products || data.data || [];
+            
+            const wrapper = document.querySelector('.card-wrapper.swiper-wrapper');
+            if (!wrapper || products.length === 0) return;
+            
+            wrapper.innerHTML = products.map(p => `
+              <div class="card swiper-slide">
+                <div class="prod-list__item__image">
+                  <a href="./sanpham.html?id=${p._id}">
+                    <img class="prod-list__item__img1" loading="lazy" alt="${p.name}" src="${p.images && p.images[0] ? p.images[0] : './img/placeholder.png'}" />
+                  </a>
+                  <span class="product-sale-tag">
+                    <span>${p.salePrice ? 'SALES!' : 'NEW!'}</span>
+                  </span>
+                  <div class="button-heart-cart-hover">
+                    <button class="btn-heart-swiper" data-id="${p._id}">
+                      <img src="./icon/heart.svg" alt="Wishlist" />
+                    </button>
+                    <button class="btn-cart-swiper" data-id="${p._id}">
+                      <img src="./icon/cart.svg" alt="Cart" />
+                    </button>
+                  </div>
+                </div>
+                <div class="prod-list__item__inner">
+                  <div class="prod-list__item__inner--child">
+                    <div class="prod-list__item__info">
+                      <div class="prod-list__item__info--title">
+                        <a href="./sanpham.html?id=${p._id}">${p.name}</a>
+                      </div>
+                      <div class="prod-list__item__info--masp">${p.category && p.category.name ? p.category.name : ''}</div>
+                    </div>
+                    <div class="prod-list__item__info--price-fb">
+                      <div class="prod-list__item--price">
+                        <span class="prod-list__item__info--price">${(p.salePrice || p.price).toLocaleString('vi-VN')} VNĐ</span>
+                        ${p.salePrice ? `<span class="prod-list__item__info--price-sales">${p.price.toLocaleString('vi-VN')} VNĐ</span>` : ''}
+                      </div>
+                      <div class="prod-list__item__info--star-icon">
+                        <img class="info--star-icon" loading="lazy" alt="" src="./icon/star.svg" />
+                        <div class="prod-list__item__info--fb">${p.rating || 4.3}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('');
+            
+            // Add event listeners for swiper buttons
+            wrapper.querySelectorAll('.btư-cart-swiper').forEach(btư => {
+              btư.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = btư.getAttribute('data-id');
+                if (window.addToCartHandler) await window.addToCartHandler(id);
+              });
+            });
+            
+            wrapper.querySelectorAll('.btư-heart-swiper').forEach(btư => {
+              btư.addEventListener('click', async (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                const id = btư.getAttribute('data-id');
+                if (window.addToWishlistHandler) await window.addToWishlistHandler(id);
+              });
+            });
+            
+            // Init swiper after loading products
+            initSwiper();
+          } catch (err) {
+            console.error('Error loading suggested products:', err);
+          }
+        }
+        
+        function initSwiper() {
+          new Swiper(".slide-content", {
+            slidesPerView: 3,
+            spaceBetween: 25,
+            loop: true,
+            centerSlide: "true",
+            fade: "true",
+            grabCursor: "true",
+            pagination: {
+              el: ".swiper-pagination",
+              clickable: true,
+              dynamicBullets: true,
+            },
+            navigation: {
+              nextEl: ".swiper-button-next",
+              prevEl: ".swiper-button-prev",
+            },
+            breakpoints: {
+              0: {
+                slidesPerView: 1,
+              },
+              520: {
+                slidesPerView: 2,
+              },
+              950: {
+                slidesPerView: 3,
+              },
+              1000: {
+                slidesPerView: 4,
+              },
+            },
+          });
+        }
+        
+        // Load suggested products when page ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', loadSuggestedProducts);
+        } else {
+          loadSuggestedProducts();
+        }
+      </script>
+      <!-------------- DANH MỤC ƯA CHUỘNG -------------->
+      <div class="third-line"></div>
+      <div class="explore-dm">
+        <h2 class="explore-dm--text">DANH MỤC ƯA CHUỘNG</h2>
+        <div
+          class="explore-dm--content"
+          style="width: 70%; display: inline-block"
+        >
+          <p>
+            Với số sáng tạo không ngừng, chúng ti tin rằng mỗi SẢN PHẨM số gấp
+            phần tạo nên phong cách của riêng bấn và là ờiểm NHẪN như tuyệt với
+            mỗi khi bấn xuặt hiấn
+          </p>
+        </div>
+        <div class="container-listing">
+          <!-- ALL -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/danhmuc-ShopAll1.jpeg" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title" id="TatCa">TẤT CẢ</p>
+              </div>
+            </a>
+          </div>
+          <!-- Day chuyen -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/day-chuyen.webp" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">DÂY CHUYỀN</p>
+              </div>
+            </a>
+          </div>
+          <!-- Bong tai -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/bong-tai.jpg" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">BÔNG TAI</p>
+              </div>
+            </a>
+          </div>
+          <!-- nhan -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/nhan.webp" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">NHẪN</p>
+              </div>
+            </a>
+          </div>
+          <!-- lược tay -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/lac-tay.webp" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">VÒNG TAY</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter -->
+    <section id="newsletter">
+      <h2 class="newsletter-heading">Đăng ký NHẪN tin</h2>
+      <p class="newsletter-desc">
+        Nhập đểa chỗ email của bạn để NHẪN thng bo vớ cc bạ suu tập mỗi v
+        NHẪN thông tin vớ cc uu di đểc biặt.
+      </p>
+      <div class="newsletter-form">
+        <input
+          type="email"
+          class="newsletter-input"
+          placeholder="địa chỗ email của bạn"
+        />
+        <button class="newsletter-btư">ĐĂNG KÝ</button>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer">
+      <div
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Dng 2 -->
+            <!-- D2 SP 1 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/TP 134-1.webp"
+                  />
+                </a>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Vàng tay LBTP 134</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Vàng tay</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        6.300.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        9.000.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- D2 SP 2 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/BCD 777-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> NEW!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Bng tai DTBCD 777</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Bng tai</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        4.500.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- D2 SP 3 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/AND 02-1.webp"
+                  />
+                </a>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <!-- <div class="button-heart"> -->
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <!-- <div class="button-cart"> -->
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Dy chuyấn KYPMAND 02</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Dy chuyấn</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        5.529.300 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        7.899.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- D2 SP 4 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/8D1-1.webp"
+                  />
+                </a>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                    />
+                  </a>
+                  <!-- <div class="button-cart"> -->
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">NHẪN NDINO 8D1</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">NHẪN</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        1.470.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        2.100.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Dng 3 -->
+            <!-- D3 SP 1 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/AND 03-1.webp"
+                  />
+                </a>
+
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <!-- <div class="button-cart"> -->
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Dy chuyấn KYPMAND 03</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Dy chuyấn</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        1.540.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        2.200.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- D3 SP 2 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/5N3-1.webp"
+                  />
+                </a>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">NHẪN NDINO 5N3</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">NHẪN</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        2.415.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        3.450.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- D3 SP 3 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/TP 145-1.webp"
+                  />
+                </a>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Vàng tay LBTP 145</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Vàng tay</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        2.513.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        3.590.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- D3 SP 4 -->
+            <section class="prod-list__item">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/BCD 666-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> NEW!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Bng tai DTBCD 666</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Bng tai</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        3.493.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        4.990.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+        <div class="swiper-button-next swiper-navBtư"></div>
+        <div class="swiper-button-prev swiper-navBtư"></div>
+        <div class="swiper-pagination"></div>
+      </div>
+      <!-- Swiper JS -->
+      <script src="js/swiper-bundle.min.js"></script>
+      <!-- card-sider -->
+      <script>
+        var swiper = new Swiper(".slide-content", {
+          slidesPerView: 3,
+          spaceBetween: 25,
+          loop: true,
+          centerSlide: "true",
+          fade: "true",
+          grabCursor: "true",
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            dynamicBullets: true,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+
+          breakpoints: {
+            0: {
+              slidesPerView: 1,
+            },
+            520: {
+              slidesPerView: 2,
+            },
+            950: {
+              slidesPerView: 3,
+            },
+            1000: {
+              slidesPerView: 4,
+            },
+          },
+        });
+      </script>
+    </div>
+    <!-- Newsletter -->
+    <section id="newsletter">
+      <h2 class="newsletter-heading">Đăng ký NHẪN tin</h2>
+      <p class="newsletter-desc">
+        Nhập đểa chỗ email của bạn để NHẪN thng bo vớ cc bạ suu tập mỗi v
+        NHẪN thông tin vớ cc uu di đểc biặt.
+      </p>
+      <div class="newsletter-form">
+        <input
+          type="email"
+          class="newsletter-input"
+          placeholder="địa chỗ email của bạn"
+        />
+        <button class="newsletter-btư">ĐĂNG KÝ</button>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer">
+      <div
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Dy chuyấn KYPMAND 04</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Dy chuyấn</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        6.300.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        9.000.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp3 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/BCD 555-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> SALES!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="">Bng tai DTBCD 555</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Bng tai</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        3.493.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        4.990.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp4 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/TP 190-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> HOT!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Vàng tay LBTP 190</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Vàng tay</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        3.983.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        5.690.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp5 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/6N9-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> NEW!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">NHẪN NDINO 6N9</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">NHẪN</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        4.990.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp6 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/AND 05-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> HOT!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Dy chuyấn KYPMAND 05</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Dy chuyấn</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        2.513.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        3.590.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp7 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/BCD 210-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> HOT!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Bng tai DTBCD 210</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Bng tai</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        1.743.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        2.490.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp8 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/TP 127-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> HOT!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Vàng tay LBTP 127</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Vàng tay</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        1.959.300d
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        2.799.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp9 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/9K6-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> NEW!</span>
+                </span>
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">NHẪN NDINO 9K6</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">NHẪN</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        3.999.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- sp10 -->
+            <div class="card swiper-slide">
+              <div class="prod-list__item__image">
+                <a href="./sanpham.html">
+                  <img
+                    class="prod-list__item__img1"
+                    loading="lazy"
+                    alt=""
+                    src="./img/AND 06-1.webp"
+                  />
+                </a>
+                <span class="product-sale-tag">
+                  <span> HOT!</span>
+                </span>
+                <!-- Hover heart and cart -->
+                <div class="button-heart-cart-hover">
+                  <a href="#!">
+                    <img
+                      src="./icon/heart.svg"
+                      alt=""
+                      class="prod-list__item__image--heart-hover"
+                      onclick="heart(this)"
+                    />
+                  </a>
+                  <a href="./sanpham.html">
+                    <img
+                      src="./icon/cart.svg"
+                      alt=""
+                      class="prod-list__item__image--cart-hover"
+                    />
+                  </a>
+                </div>
+              </div>
+
+              <div class="prod-list__item__inner">
+                <div class="prod-list__item__inner--child">
+                  <div class="prod-list__item__info">
+                    <div class="prod-list__item__info--title">
+                      <a href="./sanpham.html">Dy chuyấn KYPMAND 06</a>
+                    </div>
+                    <div class="prod-list__item__info--masp">Dy chuyấn</div>
+                  </div>
+                  <div class="prod-list__item__info--price-fb">
+                    <div class="prod-list__item--price">
+                      <span class="prod-list__item__info--price">
+                        3.983.000 VN
+                      </span>
+                      <span class="prod-list__item__info--price-sales">
+                        5.690.000 VN
+                      </span>
+                    </div>
+                    <div class="prod-list__item__info--star-icon">
+                      <img
+                        class="info--star-icon"
+                        loading="lazy"
+                        alt=""
+                        src="./icon/star.svg"
+                      />
+                      <div class="prod-list__item__info--fb">4.3</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter -->
+    <section id="newsletter">
+      <h2 class="newsletter-heading">Đăng ký NHẪN tin</h2>
+      <p class="newsletter-desc">
+        Nhập đểa chỗ email của bạn để NHẪN thng bo vớ cc bạ suu tập mỗi v
+        NHẪN thông tin vớ cc uu di đểc biặt.
+      </p>
+      <div class="newsletter-form">
+        <input
+          type="email"
+          class="newsletter-input"
+          placeholder="địa chỗ email của bạn"
+        />
+        <button class="newsletter-btư">ĐĂNG KÝ</button>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer id="footer">
+      <div
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title" id="TatCa">TẤT CẢ</p>
+              </div>
+            </a>
+          </div>
+          <!-- Day chuyen -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/day-chuyen.webp" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">DÂY CHUYỀN</p>
+              </div>
+            </a>
+          </div>
+          <!-- Bong tai -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/bong-tai.jpg" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">BÔNG TAI</p>
+              </div>
+            </a>
+          </div>
+          <!-- nhan -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/nhan.webp" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">NHẪN</p>
+              </div>
+            </a>
+          </div>
+          <!-- lược tay -->
+          <div class="listing-title">
+            <a href="" class="listing-tile__link">
+              <figure class="listing-tile__image">
+                <img class="" src="./img/lac-tay.webp" />
+              </figure>
+              <div class="listing-tile__content">
+                <p class="listing-tile__title">VÒNG TAY</p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Newsletter -->
+    <section id="newsletter">
+      <div class="container">
+        <div class="news">
+          <p class="news-content">
+            Đăng ký bản tin của KYP để cập nhất thông tin mỗi nhất vớ chương
+            tưhh giểm gi v SẢN PHẨM!
+          </p>
+          <form class="news-register">
+            <input
+              type="text"
+              name="dangKy"
+              id="dangKy"
+              placeholder="Nhập Email của bạn"
+              class="text-reg"
+            />
+            <button class="btư register">Đăng ký</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <!-- Socket.io for real-time updates -->
+    <script src="https://cdư.socket.io/4.5.4/socket.io.min.js"></script>
+    <script defer src="./js/socketClient.js"></script>
+    <script>
+      // Load header and footer after scripts loaded
+      // Wait for all deferred scripts to load
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        // If load not ready, wait for it
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

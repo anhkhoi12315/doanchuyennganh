@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quản lý mã giảm giá - Admin KYP</title>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/fonts.css">
+  <link rel="stylesheet" href="./css/header.css">
+  <link rel="stylesheet" href="./css/footer.css">
+  <style>
+    body {
+      font-family: 'Quicksand', sans-serif;
+      background: #f5f5f5;
+      padding: 20px;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #ef9059;
+      margin-bottom: 30px;
+    }
+    .header-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      background: #ef9059;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    th {
+      background: #f8f9fa;
+      font-weight: 600;
+    }
+    .badge {
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+    .badge-active {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+    .badge-inactive {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .badge-expired {
+      background: #fff3cd;
+      color: #856404;
+      border: 1px solid #ffeaa7;
+    }
+    .badge-used-up {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    .badge-pending {
+      background: #cce5ff;
+      color: #004085;
+      border: 1px solid #b8daff;
+    }
+    .btn-sm {
+      padding: 5px 10px;
+      margin: 0 5px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-edit {
+      background: #ffc107;
+      color: white;
+    }
+    .btn-delete {
+      background: #dc3545;
+      color: white;
+    }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    .modal-content {
+      position: relative;
+      background: white;
+      width: 90%;
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 30px;
+      border-radius: 10px;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+    .close {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+    .form-group {
+      margin-bottom: 15px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: 'Quicksand', sans-serif;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+    .stat-card {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .stat-card.active {
+      background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    }
+    .stat-card.expired {
+      background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+    .stat-card.pending {
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    .stat-card.inactive {
+      background: linear-gradient(135deg, #868f96 0%, #596164 100%);
+    }
+    .stat-card h3 {
+      margin: 0 0 10px 0;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .stat-card .number {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <header id="header"></header>
+  
+  <div class="container">
+    <div class="header-actions">
+      <h1>🎟️ Quản lý mã giảm giá</h1>
+      <a href="./admin.html" class="btn-primary">← Quay lại Admin</a>
+    </div>
+    
+    <!-- Thống kê -->
+    <div class="stats-grid" id="statsGrid">
+      <!-- Will be populated by JS -->
+    </div>
+    
+    <button class="btn-primary" onclick="showCreateModal()">+ Tạo mã giảm giá mới</button>
+    
+    <table id="couponTable">
+      <thead>
+        <tr>
+          <th>Mã</th>
+          <th>Mô tả</th>
+          <th>Giảm giá</th>
+          <th>Đơn tối thiểu</th>
+          <th>Thời gian</th>
+          <th>Đã dùng</th>
+          <th>Trạng thái</th>
+          <th>Thao tác</th>
+        </tr>
+      </thead>
+      <tbody id="couponTableBody">
+        <tr>
+          <td colspan="8" style="text-align: center;">Đang tải...</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Modal tạo/sửa coupon -->
+  <div id="couponModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 id="modalTitle">Tạo mã giảm giá mới</h2>
+      <form id="couponForm" onsubmit="saveCoupon(event)">
+        <div class="form-group">
+          <label>Mã giảm giá *</label>
+          <input type="text" id="code" required placeholder="VD: SUMMER2024" style="text-transform: uppercase;">
+        </div>
+        
+        <div class="form-group">
+          <label>Mô tả *</label>
+          <textarea id="description" required placeholder="Mô tả chi tiết về mã giảm giá" rows="2"></textarea>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Loại giảm giá *</label>
+            <select id="discountType" onchange="updateDiscountLabel()">
+              <option value="percentage">Phần trăm (%)</option>
+              <option value="fixed">Cố định (VNĐ)</option>
+            </select>
+          </div>
+          
+          <div class="form-group">
+            <label id="discountValueLabel">Giá trị giảm (%) *</label>
+            <input type="number" id="discountValue" required min="0" placeholder="VD: 10">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Đơn hàng tối thiểu (VNĐ)</label>
+            <input type="number" id="minOrderValue" min="0" value="0" placeholder="0">
+          </div>
+          
+          <div class="form-group">
+            <label>Giảm tối đa (VNĐ)</label>
+            <input type="number" id="maxDiscount" min="0" placeholder="Không giới hạn">
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label>Ngày bắt đầu *</label>
+            <input type="datetime-local" id="startDate" required>
+          </div>
+          
+          <div class="form-group">
+            <label>Ngày kết thúc *</label>
+            <input type="datetime-local" id="endDate" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label>Giới hạn số lần dùng</label>
+          <input type="number" id="usageLimit" min="1" placeholder="Không giới hạn">
+        </div>
+        
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="isActive" checked>
+            Kích hoạt
+          </label>
+        </div>
+        
+        <button type="submit" class="btn-primary">Lưu</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="./js/api.js"></script>
+  <script src="./js/header.js"></script>
+  <script>
+    let editingCouponId = null;
+
+    async function loadCoupons() {
+      try {
+        const data = await window.api.authFetch('/coupons/admin', { method: 'GET' });
+        
+        const tbody = document.getElementById('couponTableBody');
+        if (!data.coupons || data.coupons.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="8" style="text-align: center;">Chưa có mã giảm giá nào</td></tr>';
+          document.getElementById('statsGrid').innerHTML = '';
+          return;
+        }
+        
+        // Tính thống kê
+        const now = new Date();
+        let activeCount = 0;
+        let expiredCount = 0;
+        let pendingCount = 0;
+        let inactiveCount = 0;
+        let usedUpCount = 0;
+        
+        tbody.innerHTML = data.coupons.map(c => {
+          const discountText = c.discountType === 'percentage' 
+            ? `${c.discountValue}%` 
+            : `${c.discountValue.toLocaleString('vi-VN')}đ`;
+          
+          const dateRange = `${new Date(c.startDate).toLocaleDateString('vi-VN')} - ${new Date(c.endDate).toLocaleDateString('vi-VN')}`;
+          
+          const usageText = c.usageLimit 
+            ? `${c.usedCount}/${c.usageLimit}` 
+            : c.usedCount;
+          
+          // Kiểm tra trạng thái chi tiết
+          const startDate = new Date(c.startDate);
+          const endDate = new Date(c.endDate);
+          let statusBadge = '';
+          
+          if (!c.isActive) {
+            statusBadge = '<span class="badge badge-inactive">🔴 Tạm ngưng</span>';
+            inactiveCount++;
+          } else if (now < startDate) {
+            statusBadge = '<span class="badge badge-pending">⏳ Chưa bắt đầu</span>';
+            pendingCount++;
+          } else if (now > endDate) {
+            statusBadge = '<span class="badge badge-expired">⏰ Hết hạn</span>';
+            expiredCount++;
+          } else if (c.usageLimit && c.usedCount >= c.usageLimit) {
+            statusBadge = '<span class="badge badge-used-up">🚫 Hết lượt</span>';
+            usedUpCount++;
+          } else {
+            statusBadge = '<span class="badge badge-active">✅ Đang hoạt động</span>';
+            activeCount++;
+          }
+          
+          return `
+            <tr>
+              <td><strong>${c.code}</strong></td>
+              <td>${c.description}</td>
+              <td>${discountText}</td>
+              <td>${c.minOrderValue.toLocaleString('vi-VN')}đ</td>
+              <td>${dateRange}</td>
+              <td>${usageText}</td>
+              <td>${statusBadge}</td>
+              <td>
+                <button class="btn-sm btn-edit" onclick="editCoupon('${c._id}')">Sửa</button>
+                <button class="btn-sm btn-delete" onclick="deleteCoupon('${c._id}')">Xóa</button>
+              </td>
+            </tr>
+          `;
+        }).join('');
+        
+        // Hiển thị thống kê
+        document.getElementById('statsGrid').innerHTML = `
+          <div class="stat-card active">
+            <h3>✅ Đang hoạt động</h3>
+            <p class="number">${activeCount}</p>
+          </div>
+          <div class="stat-card pending">
+            <h3>⏳ Chưa bắt đầu</h3>
+            <p class="number">${pendingCount}</p>
+          </div>
+          <div class="stat-card expired">
+            <h3>⏰ Hết hạn</h3>
+            <p class="number">${expiredCount}</p>
+          </div>
+          <div class="stat-card inactive">
+            <h3>🔴 Tạm ngưng</h3>
+            <p class="number">${inactiveCount}</p>
+          </div>
+          <div class="stat-card expired">
+            <h3>🚫 Hết lượt sử dụng</h3>
+            <p class="number">${usedUpCount}</p>
+          </div>
+        `;
+        
+      } catch (error) {
+        console.error('Error loading coupons:', error);
+        document.getElementById('couponTableBody').innerHTML = 
+          '<tr><td colspan="8" style="text-align: center;color:red;">Lỗi tải dữ liệu: ' + error.message + '</td></tr>';
+      }
+    }
+
+    function showCreateModal() {
+      editingCouponId = null;
+      document.getElementById('modalTitle').textContent = 'Tạo mã giảm giá mới';
+      document.getElementById('couponForm').reset();
+      document.getElementById('isActive').checked = true;
+      document.getElementById('couponModal').style.display = 'block';
+    }
+
+    async function editCoupon(id) {
+      try {
+        const data = await window.api.authFetch('/coupons/admin', { method: 'GET' });
+        const coupon = data.coupons.find(c => c._id === id);
+        
+        if (!coupon) return;
+        
+        editingCouponId = id;
+        document.getElementById('modalTitle').textContent = 'Chỉnh sửa mã giảm giá';
+        document.getElementById('code').value = coupon.code;
+        document.getElementById('description').value = coupon.description;
+        document.getElementById('discountType').value = coupon.discountType;
+        document.getElementById('discountValue').value = coupon.discountValue;
+        document.getElementById('minOrderValue').value = coupon.minOrderValue || 0;
+        document.getElementById('maxDiscount').value = coupon.maxDiscount || '';
+        document.getElementById('startDate').value = new Date(coupon.startDate).toISOString().slice(0, 16);
+        document.getElementById('endDate').value = new Date(coupon.endDate).toISOString().slice(0, 16);
+        document.getElementById('usageLimit').value = coupon.usageLimit || '';
+        document.getElementById('isActive').checked = coupon.isActive;
+        
+        updateDiscountLabel();
+        document.getElementById('couponModal').style.display = 'block';
+      } catch (error) {
+        alert('Lỗi: ' + error.message);
+      }
+    }
+
+    async function saveCoupon(event) {
+      event.preventDefault();
+      
+      const couponData = {
+        code: document.getElementById('code').value,
+        description: document.getElementById('description').value,
+        discountType: document.getElementById('discountType').value,
+        discountValue: parseFloat(document.getElementById('discountValue').value),
+        minOrderValue: parseFloat(document.getElementById('minOrderValue').value) || 0,
+        maxDiscount: parseFloat(document.getElementById('maxDiscount').value) || null,
+        startDate: document.getElementById('startDate').value,
+        endDate: document.getElementById('endDate').value,
+        usageLimit: parseInt(document.getElementById('usageLimit').value) || null,
+        isActive: document.getElementById('isActive').checked
+      };
+      
+      try {
+        if (editingCouponId) {
+          await window.api.authFetch(`/coupons/admin/${editingCouponId}`, {
+            method: 'PUT',
+            body: JSON.stringify(couponData)
+          });
+          alert('Cập nhật thành công!');
+        } else {
+          await window.api.authFetch('/coupons/admin', {
+            method: 'POST',
+            body: JSON.stringify(couponData)
+          });
+          alert('Tạo mã giảm giá thành công!');
+        }
+        
+        closeModal();
+        loadCoupons();
+      } catch (error) {
+        alert('Lỗi: ' + error.message);
+      }
+    }
+
+    async function deleteCoupon(id) {
+      if (!confirm('Bạn có chắc muốn xóa mã giảm giá này?')) return;
+      
+      try {
+        await window.api.authFetch(`/coupons/admin/${id}`, { method: 'DELETE' });
+        alert('Đã xóa!');
+        loadCoupons();
+      } catch (error) {
+        alert('Lỗi: ' + error.message);
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('couponModal').style.display = 'none';
+    }
+
+    function updateDiscountLabel() {
+      const type = document.getElementById('discountType').value;
+      const label = document.getElementById('discountValueLabel');
+      label.textContent = type === 'percentage' ? 'Giá trị giảm (%) *' : 'Giá trị giảm (VNĐ) *';
+    }
+
+    // Load dữ liệu khi trang load
+    window.addEventListener('DOMContentLoaded', () => {
+      loadCoupons();
+      if (window.initHeader) window.initHeader();
+    });
+  </script>
+</body>
+</html>

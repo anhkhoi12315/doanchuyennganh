@@ -1,0 +1,50 @@
+/* ========== GLOBAL FONT CONFIGURATION ========== */
+/* Đồng bộ toàn bộ font chữ cho dự án */
+
+/* Primary Font: Quicksand (Google Fonts) */
+/* Đã import trong HTML file */
+
+/* Secondary Font: Prata (Google Fonts) */
+/* Đã import trong HTML file */
+
+/* Root font configuration */
+:root {
+  --primary-font: 'Quicksand', sans-serif;
+  --secondary-font: 'Prata', serif;
+  --fallback-font: Arial, sans-serif;
+}
+
+/* Apply primary font to body and most elements */
+html,
+body,
+* {
+  font-family: var(--primary-font);
+}
+
+/* Use secondary font for headings and special elements */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.heading,
+.title,
+.brand,
+.logo-text {
+  font-family: var(--secondary-font);
+}
+
+/* Ensure consistent font for inputs, buttons, and form elements */
+input,
+textarea,
+select,
+button {
+  font-family: var(--primary-font);
+}
+
+/* Code and pre-formatted text */
+code,
+pre {
+  font-family: 'Courier New', monospace;
+}

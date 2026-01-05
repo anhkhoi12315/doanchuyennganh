@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/sanpham-logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/sanpham.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <!-- Scripts -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="./js/giohang.js"></script>
+    <script defer src="./js/sanpham.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="./js/darkmode.js"></script>
+    <script defer src="js/chatbot.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <div class="cross-bar"></div>
+
+    <!-- Product detail -->
+    <div class="product-detail">
+      <div class="product-inf">
+        <!-- Product image -->
+        <div class="product-inf__image">
+          <div class="frame-img">
+            <img src="./img/placeholder.png" alt="" class="product-inf__image1" />
+          </div>
+          <div class="img-pro product-inf__image-small">
+            <!-- Thumbnails will be populated by JS -->
+          </div>
+        </div>
+
+        <!-- Product information -->
+        <div class="product-inf__word">
+          <p class="product-card__collection">Đang tải...</p>
+          <p class="product-inf__title">Đang tải sản phẩm...</p>
+          <div class="product-inf__star product-rating">
+            <!-- Rating will be populated by JS -->
+          </div>
+          <div class="product-price">
+            <!-- Price will be populated by JS -->
+          </div>
+          <p class="product-inf__text">
+            Giá tham khảo, có thể thay đổi theo trọng lượng, size tay và giá
+            vàng theo thời điểm
+          </p>
+          <div class="underline"></div>
+          <p class="product-inf__text1" onclick="openModal()">
+            Hướng dẫn chọn size
+          </p>
+          <!-- Cửa sổ modal -->
+          <div id="myModal" class="modal">
+            <div class="modal-content">
+              <h2
+                style="font-weight: bold; text-align: center; font-size: 22px"
+              >
+                Cách đo size nhẫn
+              </h2>
+              <br />
+              <p>
+                1. Dùng chỉ hoặc giấy bản nhỏ đo quấn quanh khớp tay, đánh dấu
+                vị trí cắt nhau
+              </p>
+              <br />
+              <p>2. Dùng thước đo chiều dài đoạn dây vừa đo được (đơn vị cm)</p>
+              <br />
+              <p>3. Từ 4.6cm đến 5.6cm: size S</p>
+              <p style="margin-left: 15px">Từ 5.6cm đến 6.4cm: size M</p>
+              <br />
+              <button onclick="closeModal()">Đóng</button>
+            </div>
+          </div>
+          <div class="sales-promotion">
+            <div class="sales-promotion1">
+              <div class="return">
+                <img
+                  src="./icon/sanpham-return.svg"
+                  alt=""
+                  class="img-return"
+                />
+                <p class="return__text">Đổi trả miễn phí trong 72 giờ</p>
+              </div>
+              <div class="payment">
+                <img
+                  src="./icon/sanpham-payment.svg"
+                  alt=""
+                  class="img-return"
+                />
+                <p class="return__text">Trả góp 0%</p>
+              </div>
+            </div>
+            <div class="sales-promotion1">
+              <div class="guarantee">
+                <img
+                  src="./icon/sanpham-guarantee.svg"
+                  alt=""
+                  class="img-return"
+                />
+                <p class="return__text">Bảo hành trọn đời</p>
+              </div>
+              <div class="delivery">
+                <img
+                  src="./icon/sanpham-delivery.svg"
+                  alt=""
+                  class="img-return"
+                />
+                <p class="return__text">Miễn phí giao hàng toàn quốc</p>
+              </div>
+            </div>
+          </div>
+          <div class="size">
+            <p style="color: var(--product-detail-text-color-dark)">Size:</p>
+            <div class="size-dropdown">
+              <div class="selected-size" onclick="toggleSizeList()">Size</div>
+              <select id="sizeSelect" onchange="selectSize()">
+                <option value="">Chọn size</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+              </select>
+              <div class="size-list" id="sizeList">
+                <div class="size-list-item" onclick="setSize('S')">S</div>
+                <div class="size-list-item" onclick="setSize('M')">M</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Decrease or Increase quantity -->
+          <div class="quantity">
+            <div style="display:flex; gap:10px; align-items:center;">
+              <button class="dec-ins btn-decrease" type="button">-</button>
+              <input type="number" class="quantity-input" value="1" min="1" style="width:60px; text-align:center; padding:8px;" />
+              <button class="dec-ins btn-increase" type="button">+</button>
+            </div>
+
+            <!-- Button THÊM VÀO GIỎ HÀNG -->
+            <a
+              href="#!"
+              id="btn-add-to-cart"
+              class="btn them"
+              >THÊM VÀO GIỎ HÀNG</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product description -->
+    <p class="product-text">Chi tiết sản phẩm</p>
+    <div class="product-description">
+      <p class="text-ring">Nhẫn</p>
+      <div class="product-des">
+        <div class="product-des__img">
+          <img src="img/3H0-1.webp" alt="" class="img-product" />
+        </div>
+        <div class="product-des__text">
+          <div class="frame">
+            <div class="inf-text">Thông tin</div>
+            <div class="des-text">
+              Chất liệu:
+              <br />
+              Trọng lượng:
+              <br />
+              Loại đá:
+              <br />
+              Kích thước đá:
+            </div>
+            <div class="des-text">
+              Bạc
+              <br />
+              3.0g
+              <br />
+              Zirconia
+              <br />
+              1.25mm
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Review -->
+    <div class="review">
+      <div class="review-read">
+        <!-- Review statistics -->
+        <div class="review-statistics">
+          <p class="customer-review">Đánh giá sản phẩm</p>
+          <p class="review-quantity">77 lượt đánh giá</p>
+          <div class="product-inf__star">
+            <img src="./icon/sanpham-star.svg" alt="" />
+            <p style="color: var(--product-detail-text-color-dark)">4.9</p>
+          </div>
+          <div class="star">
+            <p class="star-quality">5 sao</p>
+            <div class="cross-bar__star">
+              <div class="cross-quantity1"></div>
+            </div>
+            <p class="star-quality">37</p>
+          </div>
+          <div class="star">
+            <p class="star-quality">4 sao</p>
+            <div class="cross-bar__star">
+              <div class="cross-quantity2"></div>
+            </div>
+            <p class="star-quality">20</p>
+          </div>
+          <div class="star">
+            <p class="star-quality">3 sao</p>
+            <div class="cross-bar__star">
+              <div class="cross-quantity3"></div>
+            </div>
+            <p class="star-quality">12</p>
+          </div>
+          <div class="star">
+            <p class="star-quality">2 sao</p>
+            <div class="cross-bar__star">
+              <div class="cross-quantity4"></div>
+            </div>
+            <p class="star-quality">8</p>
+          </div>
+          <div class="star">
+            <p class="star-quality">1 sao</p>
+            <div class="cross-bar__star">
+              <div class="cross-quantity5"></div>
+            </div>
+            <p class="star-quality">0</p>
+          </div>
+        </div>
+
+        <!-- Writing review -->
+        <div class="review-writing">
+          <p class="customer-review">Đánh giá của bạn về sản phẩm này</p>
+          <img src="./icon/sanpham-5star.svg" alt="" class="img-star" />
+          <form id="reviewForm" method="get">
+            <div class="review-form">
+              <div class="form-group">
+                <label for="reviewStar">Số sao (Điền từ 1 đến 5)</label> <br />
+                <input
+                  class="write-star"
+                  type="number"
+                  id="reviewStar"
+                  name="reviewStar"
+                  onblur="validateStar()"
+                /><br />
+                <span id="starError" style="color: red"></span>
+                <!-- Thông báo lỗi -->
+              </div>
+              <div class="form-group">
+                <label for="reviewTitle">Tiêu đề</label> <br />
+                <input
+                  class="write-headline"
+                  type="text"
+                  id="reviewTitle"
+                  name="reviewTitle"
+                />
+              </div>
+              <div class="form-group">
+                <label for="reviewDetails">Đánh giá chi tiết</label> <br />
+                <textarea
+                  class="write-detail"
+                  id="reviewDetails"
+                  name="reviewDetails"
+                  rows="4"
+                ></textarea>
+              </div>
+            </div>
+            <button
+              style="border: none; margin-top: 15px"
+              class="btn submit"
+              type="submit"
+              onclick='
+                alert("Gửi review thành công!");'
+            >
+              Gửi
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Customer review -->
+    <div class="container">
+      <div class="review-customer">
+        <div class="customer">
+          <img src="icon/sanpham-logo.svg" alt="" class="ava-img" />
+          <p class="review-tittle">Thu Hiền</p>
+          <img src="./icon/sanpham-5star.svg" alt="" class="star-img" />
+          <p class="review-tittle">Nhẫn quá đẹp</p>
+          <p class="review-detail">
+            Chưa bao giờ tôi mua một chiếc nhẫn đẹp như dị. Happy new yearrr.
+            Chúc mọi người năm mới vui vẻ.
+          </p>
+        </div>
+        <div class="customer">
+          <img src="icon/sanpham-logo.svg" alt="" class="ava-img" />
+          <div class="review-tittle">Minh Diệu</div>
+          <img src="./icon/sanpham-5star.svg" alt="" class="star-img" />
+          <div class="review-tittle">Nhẫn quá đẹp</div>
+          <div class="review-detail">
+            Chưa bao giờ tôi mua một chiếc nhẫn đẹp như dị. Happy new yearrr.
+            Chúc mọi người năm mới vui vẻ.
+          </div>
+        </div>
+        <div class="customer">
+          <img src="icon/sanpham-logo.svg" alt="" class="ava-img" />
+          <div class="review-tittle">Bảo Ngọc</div>
+          <img src="./icon/sanpham-5star.svg" alt="" class="star-img" />
+          <div class="review-tittle">Nhẫn quá đẹp</div>
+          <div class="review-detail">
+            Chưa bao giờ tôi mua một chiếc nhẫn đẹp như dị. Happy new yearrr.
+            Chúc mọi người năm mới vui vẻ.
+          </div>
+        </div>
+      </div>
+      <!-- Button Load more -->
+      <a href="./danhmuc.html" class="btn home-product__Load">Xem thêm</a>
+    </div>
+
+    <!-- Similar products -->
+    <div class="container">
+      <p class="product-inf__title__1">Sản phẩm tương tự</p>
+      <div class="product-home">
+        <!-- Products loaded by JS -->
+      </div>
+
+      <!-- Button xem thêm -->
+      <a href="./danhmuc.html" class="btn home-product">Xem thêm</a>
+    </div>
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <!-- Socket.io for real-time updates -->
+    <script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script defer src="./js/socketClient.js"></script>
+    <script>
+      // Load header and footer after scripts loaded
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        // If load not ready, wait for it
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/giohang.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <!-- Scripts -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="./js/giohang.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="./js/darkmode.js"></script>
+    <script defer src="js/chatbot.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <script>
+      if (typeof load === 'function') load("#header", "./template/header.html");
+    </script>
+    <!-- Product detail -->
+    <div class="product-container">
+      <header class="cart-title">GIỎ HÀNG</header>
+
+      <!-- Cart items table -->
+      <div class="cart-table-wrapper">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Sản phẩm</th>
+              <th>Giá</th>
+              <th>Số lượng</th>
+              <th>Tổng</th>
+              <th>Hành động</th>
+            </tr>
+          </thead>
+          <tbody class="cart-items-tbody">
+            <!-- Items injected by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <div class="cart-empty-msg" style="display:none; text-align:center; padding:30px;">
+        <p style="font-size:18px; color:#666;">Giỏ hàng trống</p>
+        <a href="./danhmuc.html"><button class="continue-shopping-btn">Tiếp tục mua hàng</button></a>
+      </div>
+
+      <!-- Cart summary -->
+      <div class="cart-summary">
+        <div class="summary-buttons">
+          <a href="./danhmuc.html"><button class="continue-shopping-btn">Tiếp tục mua hàng</button></a>
+          <button class="clear-cart-btn">Xóa giỏ hàng</button>
+        </div>
+        <div class="summary-box">
+          <div class="summary-row">
+            <span>Tạm tính:</span>
+            <span class="cart-subtotal">0 VNĐ</span>
+          </div>
+          <div class="summary-row">
+            <span style="font-size:14px; color:#999;">(Đã bao gồm thuế VAT)</span>
+          </div>
+          <a href="./thanhtoan.html"><button class="btn-checkout">MUA HÀNG</button></a>
+        </div>
+      </div>
+    </div>
+    <!-- Similar products -->
+    <div class="similar-container">
+      <p class="product-inf__title__1">CÓ THỂ BẠN CŨNG THÍCH</p>
+      <div class="product-home">
+        <!-- Products loaded by JS -->
+      </div>
+      <!-- Button xem thêm -->
+      <a href="./danhmuc.html" class="btn home-product">Xem thêm</a>
+    </div>
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <script>
+      // Load header and footer after scripts loaded
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

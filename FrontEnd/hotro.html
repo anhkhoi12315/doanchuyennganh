@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/hotro.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <!-- Scripts -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="./js/hotro.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="./js/darkmode.js"></script>
+    <script defer src="js/chatbot.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    
+    <!-- Chatbot Support Section - MOVED TO TOP -->
+    <section class="chatbot-section" style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);padding:60px 20px;margin-bottom:40px;">
+      <div style="max-width:800px;margin:0 auto;">
+        <h2 style="text-align:center;font-size:36px;margin-bottom:15px;color:white;font-weight:700;">🤖 Tư vấn sản phẩm tự động</h2>
+        <p style="text-align:center;color:#f0f0f0;margin-bottom:40px;font-size:18px;">✨ Điền thông tin để nhận gợi ý sản phẩm phù hợp nhất chỉ trong vài giây!</p>
+        
+        <div id="chatbot-form" style="background:white;padding:40px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div>
+              <label style="display:block;margin-bottom:8px;font-weight:600;color:#333;">Tuổi</label>
+              <input type="number" id="chat-age" placeholder="VD: 25" style="width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;transition:border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'" />
+            </div>
+            <div>
+              <label style="display:block;margin-bottom:8px;font-weight:600;color:#333;">Giới tính</label>
+              <select id="chat-gender" style="width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;transition:border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+                <option value="">-- Chọn --</option>
+                <option value="male">Nam</option>
+                <option value="female">Nữ</option>
+                <option value="other">Khác</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="margin-top:20px;">
+            <label style="display:block;margin-bottom:8px;font-weight:600;color:#333;">Dịp đặc biệt</label>
+            <select id="chat-occasion" style="width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;transition:border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+              <option value="">-- Chọn dịp --</option>
+              <option value="birthday">Sinh nhật</option>
+              <option value="anniversary">Kỷ niệm</option>
+              <option value="wedding">Đám cưới</option>
+              <option value="graduation">Tốt nghiệp</option>
+              <option value="daily">Hàng ngày</option>
+            </select>
+          </div>
+
+          <div style="margin-top:20px;">
+            <label style="display:block;margin-bottom:8px;font-weight:600;color:#333;">Phong cách yêu thích</label>
+            <select id="chat-style" style="width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;transition:border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'">
+              <option value="">-- Chọn phong cách --</option>
+              <option value="classic">Cổ điển</option>
+              <option value="modern">Hiện đại</option>
+              <option value="minimalist">Tối giản</option>
+              <option value="luxury">Sang trọng</option>
+              <option value="vintage">Vintage</option>
+            </select>
+          </div>
+
+          <div style="margin-top:20px;">
+            <label style="display:block;margin-bottom:8px;font-weight:600;color:#333;">Ngân sách (VNĐ)</label>
+            <input type="text" id="chat-budget" placeholder="VD: 5.000.000" style="width:100%;padding:12px;border:2px solid #e0e0e0;border-radius:8px;font-size:14px;transition:border-color 0.3s;" onfocus="this.style.borderColor='#667eea'" onblur="this.style.borderColor='#e0e0e0'" />
+          </div>
+
+          <button onclick="getChatbotRecommendations()" style="width:100%;margin-top:30px;padding:16px;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);color:white;border:none;border-radius:10px;font-size:18px;font-weight:700;cursor:pointer;transition:transform 0.2s, box-shadow 0.2s;box-shadow:0 4px 15px rgba(102,126,234,0.4);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(102,126,234,0.6)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(102,126,234,0.4)'">
+            🔍 Tìm sản phẩm phù hợp ngay!
+          </button>
+        </div>
+
+        <div id="chatbot-results" style="margin-top:30px;"></div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <h2 class="faq-title">Câu hỏi thường gặp</h2>
+      <!-- Câu hỏi 1 -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <p>1. Làm cách nào để nhận được mã giảm giá từ KYP?</p>
+          <img src="./icon/hotro-add.svg" alt="" class="faq-icon" />
+        </div>
+        <div class="faq-answer">
+          <p>Để nhận được mã giảm giá từ KYP, hãy thực hiện các bước sau:</p>
+          <p>
+            1. Trở thành thành viên của KYP: Điền thông tin
+            của bạn tại mục "Đăng kí thành viên" <a href="dangky.html" style="font-style:italic;">tại đây</a>, sau đó nhấn
+            nút "Đăng ký".
+          </p>
+          <p>
+            2. Chờ đợi thông báo từ chúng tôi: Mã giảm giá sẽ
+            được đính kèm tại các sự kiện giảm giá tiếp theo và KYP sẽ email
+            thông báo đến bạn.
+          </p>
+        </div>
+      </div>
+
+      <!-- Câu hỏi 2 -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <p>
+            2. Tôi có thể đưa ý tưởng thiết kế sản phẩm theo ý của mình hay
+            không?
+          </p>
+          <img src="./icon/hotro-add.svg" alt="" class="faq-icon" />
+        </div>
+        <div class="faq-answer">
+          Bạn có thể đưa thiết kế theo ý tưởng thiết kế cho nhân viên của chúng
+          tôi tại cửa hàng hoặc liên hệ qua phần liên hệ của cửa hàng <a href="lienhe.html" style="font-style:italic;">tại đây</a> !
+        </div>
+      </div>
+      <!-- Câu hỏi 3 -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <p>3. Phí vận chuyển được tính như thế nào?</p>
+          <img src="./icon/hotro-add.svg" alt="" class="faq-icon" />
+        </div>
+        <div class="faq-answer">
+          Phí vận chuyển sẽ được tính tùy theo đơn hàng, vị trí và mã giảm giá
+          của bạn nhé.
+        </div>
+      </div>
+      <!-- Câu hỏi 4 -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <p>4. Nếu không vừa ý, tôi có thể đổi trả hay không?</p>
+          <img src="./icon/hotro-add.svg" alt="" class="faq-icon" />
+        </div>
+        <div class="faq-answer">
+          Bạn có thể đổi trả trong vòng 7 ngày sau khi giao hàng nhé!
+        </div>
+      </div>
+      <!-- Câu hỏi 5 -->
+      <div class="faq-item">
+        <div class="faq-question">
+          <p>5. Xuất hoá đơn điện tử/ hoá đơn VAT như thế nào?</p>
+          <img src="./icon/hotro-add.svg" alt="" class="faq-icon" />
+        </div>
+        <div class="faq-answer">
+          Bạn liên hệ nhân viên của KYP tại cửa hàng hoặc thông qua các kênh
+          liên lạc qua facebook/instagram của KYP kèm theo hoá đơn để được hỗ
+          trợ nhé!
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <script>
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

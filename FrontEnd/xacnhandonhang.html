@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vn">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="icon/Logo.svg" rel="shortcut icon" />
+    <title>Đặt hàng thành công - KYP</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <script defer src="js/authSync.js"></script>
+    <script defer src="js/api.js"></script>
+    <script defer src="js/header.js"></script>
+    <style>
+        .success-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 40px;
+            text-align: center;
+        }
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: #4CAF50;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            animation: scaleIn 0.5s ease-out;
+        }
+        .success-icon::before {
+            content: "✓";
+            font-size: 60px;
+            color: white;
+            font-weight: bold;
+        }
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+        .success-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 15px;
+        }
+        .success-message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .order-info {
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            text-align: left;
+        }
+        .order-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .order-row:last-child {
+            border-bottom: none;
+        }
+        .order-label {
+            font-weight: 600;
+            color: #333;
+        }
+        .order-value {
+            color: #666;
+        }
+        .order-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f86624;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        .btn {
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: all 0.3s;
+        }
+        .btn-primary {
+            background: #f86624;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #e55515;
+        }
+        .btn-secondary {
+            background: white;
+            color: #f86624;
+            border: 2px solid #f86624;
+        }
+        .btn-secondary:hover {
+            background: #f86624;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header"></header>
+
+    <div class="success-container">
+        <div class="success-icon"></div>
+        <h1 class="success-title">Đặt hàng thành công!</h1>
+        <p class="success-message">Cảm ơn bạn đã tin tưởng và mua hàng tại KYP</p>
+
+        <div class="order-info" id="order-details">
+            <div style="text-align:center;padding:20px;color:#999;">
+                Đang tải thông tin đơn hàng...
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="./index.html" class="btn btn-primary">Tiếp tục mua sắm</a>
+            <a href="#" id="view-orders-btn" class="btn btn-secondary">Xem đơn hàng</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    
+    <script>
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+    <script defer src="js/xacnhandonhang.js"></script>
+</body>
+</html>

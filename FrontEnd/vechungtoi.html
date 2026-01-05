@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="vn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Chỉnh biểu tượng web -->
+    <link href="./icon/Logo.svg" rel="shortcut icon" />
+    <title>KYP - Trang sức cao cấp</title>
+    <!-- GG Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/fonts.css" />
+    <link rel="stylesheet" href="css/vechungtoi.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/darkmode.css" />
+    <!-- JS -->
+    <script defer src="./js/authSync.js"></script>
+    <script defer src="./js/api.js"></script>
+    <script defer src="./js/header.js"></script>
+    <script defer src="js/vechungtoi.js"></script>
+    <!-- Chatbot AI -->
+    <link rel="stylesheet" href="css/chatbot.css">
+    <script defer src="./js/darkmode.js"></script>
+    <script defer src="js/chatbot.js"></script>
+  </head>
+  <body>
+    <!-- Header -->
+    <header id="header"></header>
+    <div class="content-wrapper">
+      <div class="content1">
+        <div class="ve-chung-toi-wrap">
+          <div class="ve-chung-toi">
+            <div style="color: black !important">
+              <h1><b>Về chúng tôi</b></h1>
+              <p>
+                KYP là nhà sản xuất trang sức hàng đầu tại Việt Nam. Với đội
+                ngũ nội bộ có tay nghề cao, công ty chúng tôi cung cấp nhiều sản
+                phẩm và dịch vụ khác nhau đáp ứng nhu cầu của khách hàng. Tận
+                dụng đội ngũ bán hàng hùng hậu với hơn 20 năm kinh nghiệm hoạt
+                động xuất khẩu, chúng tôi chiếm được lòng tin của khách hàng
+                trên toàn cầu nhờ nguồn lực đáng tin cậy cũng như hệ thống kiểm
+                soát chất lượng nghiêm ngặt.
+              </p>
+            </div>
+            <img src="img/ring1.jpg"  />
+          </div>
+        </div>
+        <div class="su-menh">
+          <img src="img/ring2.jpg" />
+          <div>
+            <h1><b>Sứ mệnh</b></h1>
+            <p>
+              Chúng tôi tin rằng mỗi mảnh trang sức không chỉ là một sản phẩm mà
+              còn là một câu chuyện, là biểu tượng của cái đẹp, cái tinh túy 
+               trong từng người. Chúng tôi cam kết mang đến cho khách hàng những 
+               trải nghiệm mua sắm tuyệt vời nhất, từ quá trình lựa chọn sản phẩm 
+               cho đến việc chăm sóc sau bán hàng. Chúng tôi muốn trở thành đối tác
+                đáng tin cậy của mọi người trong những khoảnh khắc quan trọng của cuộc sống.
+            </p>
+          </div>
+        </div>
+        <div class="tam-nhin">
+          <div>
+            <h1><b>Tầm nhìn</b></h1>
+            <p>
+              Tầm nhìn của chúng tôi là xây dựng một cộng đồng yêu trang sức,
+              nơi mọi người không chỉ đến để mua sắm mà còn để chia sẻ, cảm nhận
+              và tận hưởng cái đẹp từ những tác phẩm nghệ thuật nhỏ bé này.
+              Chúng tôi muốn trở thành điểm đến hàng đầu cho những người đam mê
+              trang sức, nơi họ có thể khám phá những xu hướng mới, những ý
+              tưởng sáng tạo và nhận được sự tư vấn chuyên nghiệp từ các chuyên
+              gia.
+            </p>
+          </div>
+          <img src="img/ring3.jpg" />
+        </div>
+      </div>
+      <div class="thanh-vien">
+        <h1><b>Người sáng lập</b></h1>
+        <p>
+          Với đam mê và tâm huyết trong ngành trang sức, chúng tôi tạo nên thương hiệu KYP 
+          nhằm mang đến những sản phẩm trang sức tinh tế và chất lượng cao cho khách hàng.
+        </p>
+        <div class="thanh-vien-single">
+          <div class="founder-profile">
+            <img src="img/AnhKhoi.jpg" alt="Nguyễn Anh Khôi" />
+            <div class="founder-info">
+              <h2>Nguyễn Anh Khôi</h2>
+              <p class="founder-title">Nhà sáng lập & CEO</p>
+              <p class="founder-desc">
+                Với hơn 5 năm kinh nghiệm trong lĩnh vực trang sức cao cấp, 
+                tôi cam kết mang đến những sản phẩm chất lượng và dịch vụ tận tâm nhất 
+                cho quý khách hàng.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="footer"></footer>
+    <script>
+      // Load header and footer after scripts loaded
+      if (typeof load === 'function') {
+        load("#header", "./template/header.html");
+        load("#footer", "./template/footer.html");
+      } else {
+        setTimeout(() => {
+          if (typeof load === 'function') {
+            load("#header", "./template/header.html");
+            load("#footer", "./template/footer.html");
+          }
+        }, 100);
+      }
+    </script>
+  </body>
+</html>

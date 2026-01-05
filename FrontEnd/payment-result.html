@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kết Quả Thanh Toán - KYP Jewelry</title>
+    <link rel="stylesheet" href="./css/fonts.css">
+    <link rel="stylesheet" href="./css/header.css">
+    <link rel="stylesheet" href="./css/footer.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'SVN-Gilroy', sans-serif;
+        }
+
+        body {
+            zoom: 0.8;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .result-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-header {
+            padding: 40px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .result-header.success {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+
+        .result-header.failed {
+            background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+        }
+
+        .result-header.pending {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .result-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 1s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .result-title {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .result-message {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        .result-body {
+            padding: 40px;
+        }
+
+        .order-info {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .info-row:last-child {
+            border-bottom: none;
+        }
+
+        .info-label {
+            color: #666;
+            font-size: 15px;
+        }
+
+        .info-value {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .info-value.highlight {
+            color: #f86624;
+            font-size: 20px;
+        }
+
+        .payment-details {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid #ffc107;
+            margin-bottom: 30px;
+        }
+
+        .payment-details h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .payment-details p {
+            color: #856404;
+            margin-bottom: 8px;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 16px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .status-badge.success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-badge.failed {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .status-badge.pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+    </style>
+</head>
+<body>
+    <div id="header"></div>
+
+    <div class="result-container">
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p style="color:#666;font-size:16px;">Đang xử lý kết quả thanh toán...</p>
+        </div>
+
+        <div id="result-content" style="display:none;">
+            <!-- Will be filled by JavaScript -->
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script src="./js/api.js"></script>
+    <script src="./template/header.js"></script>
+    <script src="./template/footer.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('orderId');
+            const status = urlParams.get('status');
+
+            if (!orderId) {
+                showError('Không tìm thấy thông tin đơn hàng');
+                return;
+            }
+
+            try {
+                // Check payment status from server
+                const result = await window.api.authFetch(`/payment/${orderId}/status`);
+                
+                if (result.success) {
+                    displayResult(result.data);
+                } else {
+                    showError(result.message || 'Không thể lấy thông tin thanh toán');
+                }
+            } catch (error) {
+                console.error('Error checking payment:', error);
+                showError('Lỗi kiểm tra trạng thái thanh toán');
+            }
+        });
+
+        function displayResult(data) {
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('result-content');
+            
+            loading.style.display = 'none';
+            content.style.display = 'block';
+
+            const paymentStatus = data.paymentStatus || 'pending';
+            let icon, title, message, headerClass, badgeClass;
+
+            switch(paymentStatus) {
+                case 'paid':
+                    icon = '✅';
+                    title = 'Thanh toán thành công!';
+                    message = 'Cảm ơn bạn đã đặt hàng. Đơn hàng của bạn đã được thanh toán và đang được xử lý.';
+                    headerClass = 'success';
+                    badgeClass = 'success';
+                    break;
+                case 'failed':
+                    icon = '❌';
+                    title = 'Thanh toán thất bại';
+                    message = 'Giao dịch không thành công. Vui lòng thử lại hoặc chọn phương thức thanh toán khác.';
+                    headerClass = 'failed';
+                    badgeClass = 'failed';
+                    break;
+                case 'pending':
+                default:
+                    icon = '⏳';
+                    title = 'Đang chờ thanh toán';
+                    message = 'Đơn hàng đã được tạo. Vui lòng hoàn tất thanh toán để tiếp tục.';
+                    headerClass = 'pending';
+                    badgeClass = 'pending';
+                    break;
+            }
+
+            content.innerHTML = `
+                <div class="result-header ${headerClass}">
+                    <div class="result-icon">${icon}</div>
+                    <h1 class="result-title">${title}</h1>
+                    <p class="result-message">${message}</p>
+                </div>
+
+                <div class="result-body">
+                    <div class="order-info">
+                        <div class="info-row">
+                            <span class="info-label">Mã đơn hàng:</span>
+                            <span class="info-value">${data.orderNumber}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Trạng thái thanh toán:</span>
+                            <span class="info-value">
+                                ${getStatusText(paymentStatus)}
+                                <span class="status-badge ${badgeClass}">${getStatusBadge(paymentStatus)}</span>
+                            </span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Phương thức:</span>
+                            <span class="info-value">${getPaymentMethodText(data.paymentMethod)}</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Tổng tiền:</span>
+                            <span class="info-value highlight">${formatPrice(data.total)}</span>
+                        </div>
+                        ${data.paymentDetails && data.paymentDetails.transactionId ? `
+                        <div class="info-row">
+                            <span class="info-label">Mã giao dịch:</span>
+                            <span class="info-value" style="font-size:14px;color:#666;">${data.paymentDetails.transactionId}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+
+                    ${paymentStatus === 'pending' && (data.paymentMethod === 'banking' || data.paymentMethod === 'momo') ? `
+                    <div class="payment-details">
+                        <h3>📌 Hướng dẫn thanh toán</h3>
+                        <p><strong>Bước 1:</strong> Chuyển khoản đúng số tiền <strong>${formatPrice(data.total)}</strong></p>
+                        <p><strong>Bước 2:</strong> Nội dung chuyển khoản: <strong>${data.orderNumber} + Số điện thoại</strong></p>
+                        <p><strong>Bước 3:</strong> Sau khi chuyển khoản thành công, đơn hàng sẽ được xác nhận trong 5-30 phút</p>
+                        <p style="margin-top:15px;">💡 <em>Bạn có thể kiểm tra trạng thái đơn hàng trong mục "Đơn hàng của tôi"</em></p>
+                    </div>
+                    ` : ''}
+
+                    ${paymentStatus === 'failed' ? `
+                    <div class="payment-details" style="background:#f8d7da;border-left-color:#dc3545;">
+                        <h3 style="color:#721c24;">⚠️ Giao dịch không thành công</h3>
+                        <p style="color:#721c24;">Có thể do một trong các lý do sau:</p>
+                        <p style="color:#721c24;">• Số dư tài khoản không đủ</p>
+                        <p style="color:#721c24;">• Thông tin thẻ không chính xác</p>
+                        <p style="color:#721c24;">• Ngân hàng từ chối giao dịch</p>
+                        <p style="color:#721c24;margin-top:10px;">Vui lòng thử lại hoặc chọn phương thức thanh toán khác.</p>
+                    </div>
+                    ` : ''}
+
+                    <div class="action-buttons">
+                        <a href="./donhang.html" class="btn btn-primary">Xem đơn hàng</a>
+                        <a href="./index.html" class="btn btn-secondary">Về trang chủ</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function showError(message) {
+            const loading = document.getElementById('loading');
+            const content = document.getElementById('result-content');
+            
+            loading.style.display = 'none';
+            content.style.display = 'block';
+
+            content.innerHTML = `
+                <div class="result-header failed">
+                    <div class="result-icon">⚠️</div>
+                    <h1 class="result-title">Có lỗi xảy ra</h1>
+                    <p class="result-message">${message}</p>
+                </div>
+                <div class="result-body">
+                    <div class="action-buttons">
+                        <a href="./donhang.html" class="btn btn-primary">Xem đơn hàng</a>
+                        <a href="./index.html" class="btn btn-secondary">Về trang chủ</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function formatPrice(price) {
+            return (price || 0).toLocaleString('vi-VN') + ' VNĐ';
+        }
+
+        function getStatusText(status) {
+            const texts = {
+                'paid': 'Đã thanh toán',
+                'pending': 'Chờ thanh toán',
+                'failed': 'Thất bại',
+                'refunded': 'Đã hoàn tiền'
+            };
+            return texts[status] || status;
+        }
+
+        function getStatusBadge(status) {
+            const badges = {
+                'paid': 'THÀNH CÔNG',
+                'pending': 'CHỜ XỬ LÝ',
+                'failed': 'THẤT BẠI',
+                'refunded': 'ĐÃ HOÀN'
+            };
+            return badges[status] || status;
+        }
+
+        function getPaymentMethodText(method) {
+            const methods = {
+                'COD': 'Thanh toán khi nhận hàng (COD)',
+                'momo': 'Ví MoMo',
+                'banking': 'Chuyển khoản ngân hàng',
+                'card': 'Thẻ tín dụng/ghi nợ',
+                'zalopay': 'ZaloPay'
+            };
+            return methods[method] || method;
+        }
+    </script>
+</body>
+</html>
